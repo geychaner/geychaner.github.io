@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>Shoemaker-Levy 9 at BBSO</TITLE>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></HEAD>
+<script>
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+}
+</script><BODY>
+<div class="w3-container w3-padding-16 w3-deep-orange">
+<H1 style="text-align:center">Shoemaker-Levy 9 at BBSO</H1>
+</div>
+<div class="w3-cell-row">
+<div class="w3-container w3-cell w3-padding-48 w3-amber">
+The following images of Jupiter were taken at
+<A HREF="http://www.bbso.njit.edu">Big Bear Solar Observatory</A>
+at around the time of the Showemaker-Levy 9 R and V fragment impacts.  Unfortunately, no
+fireballs were visible (intermittent clouds and poor seeing conditions didn't help), but
+previous impact areas can be clearly seen on the disk.
+</div>
+<div class="w3-container w3-cell w3-padding-48 w3-amber">
+All images were taken by staff members John Varsik and Glenn Eychaner, and
+summer students Walter Brisken, Michael Hartl, Vincent Pery, and Hans-Michael
+Hauser, with the 65cm telescope and 12-bit 1024x1024 CCD camera. South is
+down, and Jupiter rotates left to right.
+</div>
+</div>
+<div class="w3-container w3-padding-16 w3-khaki">
+<h3>Fragment R impact</H3>
+</div>
+<div class="w3-row">
+<div class="w3-container w3-quarter w3-padding-16">
+<IMG SRC="sl9images/sl9rmov.gif" ALT="Movie of fragment R images" style="float:left" class="w3-margin-right">
+The GIF animation at left was produced from the one hour time series of 10 images, taken
+using the full camera sensitivity (about 4000-10000 Angstroms) for the shortest possible
+exposures.  In the early images, two impact areas from earlier impacts can be seen in the
+south at left and right; in the last images, the impact R area appears to begin to show as
+a dent in the edge of the image.
+<IMG SRC="sl9images/sl9rtime.gif" ALT="Time series of fragment R" style="cursor:zoom-in"
+    onclick="onClick(this)" class="w3-border w3-padding-small w3-image">
+</div>
+<div class="w3-container w3-half w3-padding-16">
+<IMG SRC="sl9images/sl9rcolor.gif" ALT="False color image of fragment R" style="float:left"
+    class="w3-margin-right w3-image">
+<IMG SRC="sl9images/sl9rfilter.gif" ALT="Filter series of fragment R" onclick="onClick(this)"
+    style="float:right;width:100%;max-width:300px;cursor:zoom-in"
+    class="w3-border w3-padding-small w3-image">
+</A>
+The false color image at left was produced from the IR, red, and visible images from the set of
+four images at right, each taken with different filtration.  The visible image was taken with a
+4000-7000 Angstrom bandpass, the red with a 6000-7000 Angstrom bandpass, the IR with a 7000+
+Angstrom cutoff filter, and the broadband with no filter.
+</div>
+<div class="w3-container w3-quarter w3-padding-16">
+<div>
+<IMG SRC="sl9images/sl9rsize.gif" ALT="Exposure series of fragment R" onclick="onClick(this)"
+     style="cursor:zoom-in" class="w3-border w3-padding-small w3-image">
+</div>
+Finally, above are three images taken at approximately the same time using the full camera
+sensitivity at different resolutions and exposures, using the camera's built-in 2x2 and 4x4
+summing modes.  The effect of exposure time on image quality can clearly be seen.
+</div>
+</div>
+<div class="w3-container w3-padding-16 w3-khaki">
+<h3>Fragment V impact</h3>
+</div>
+<div class="w3-row">
+<div class="w3-container w3-twothird w3-padding-16">
+<IMG SRC="sl9images/sl9vcolor.gif" ALT="False color image of fragment V" style="float:left" class="w3-margin-right">
+<IMG SRC="sl9images/sl9vfilter.gif" ALT="Filter series of fragment V" onclick="onClick(this)"
+    style="float:right;width:100%;max-width:300px;cursor:zoom-in"
+    class="w3-border w3-padding-small w3-image">
+The false color image at left was produced from the IR, red, and visible images from the set of four images at right, each taken with different filtration.  The visible image was taken with a 4000-7000 Angstrom bandpass, the red with a 6000-7000 Angstrom bandpass, the IR with a 7000+ Angstrom cutoff filter, and the broadband with no filter.</TD>
+</div>
+</div>
+<div id="modal01" class="w3-modal w3-center" onclick="this.style.display='none'">
+<div class="w3-modal-content"><img class="w3-center" id="img01" style="width:100%"></div>
+</div>
+
+<!--<A HREF="index.html">Home</A>-->
+</BODY>
+</HTML>
