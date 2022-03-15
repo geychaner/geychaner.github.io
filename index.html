@@ -1,54 +1,63 @@
+<!DOCTYPE html>
 <HTML>
-<HEAD><TITLE>Glenn C. Eychaner's tiny web site</TITLE></HEAD>
+<HEAD>
+<TITLE>Glenn C. Eychaner's tiny web site</TITLE>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></HEAD>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</HEAD>
+<BODY>
 <script>
 function onClick(element) {
   document.getElementById("img01").src = element.src;
   document.getElementById("modal01").style.display = "block";
 }
-</script><BODY>
+</script>
 <div class="w3-container w3-padding-16 w3-light-blue">
-<H2 style="text-align:center">Glenn C. Eychaner's life and projects</H2>
+<H2 style="text-align:center">Glenn C. Eychaner's projects</H2>
 </div>
 <div class="w3-cell-row">
-<div class="w3-container w3-cell w3-padding-48 w3-pale-blue">
-<a href="https://www.lbto.org" target="_blank"><IMG
-SRC="https://www.lbto.org/uploads/2/3/4/2/23422784/published/2893185.jpg" ALT="Large Binocular
-Telescope Observatory" style="float:left;max-width:200px" class="w3-margin-right"></a>Currently,
-I write software for the <a href="https://www.lbto.org/instruments.html" target="_blank">LUCI
-instruments</a> at the <a href="https://www.lbto.org" target="_blank">Large Binocular Telescope
-Observatory</a> in Tucson, Arizona.
+<div class="w3-container w3-mobile w3-cell w3-padding-32 w3-pale-blue">
+<a href="https://www.lbto.org" target="_blank">
+<IMG SRC="https://www.lbto.org/uploads/2/3/4/2/23422784/published/2893185.jpg" ALT="Large Binocular
+Telescope Observatory" style="float:left;max-width:150px" class="w3-margin-right">
+</a>
+Currently, I write software for the <a href="https://www.lbto.org/instruments.html"
+target="_blank">LUCI instruments</a> at the <a href="https://www.lbto.org" target="_blank">Large
+Binocular Telescope Observatory</a> in Tucson, Arizona.
 </div>
-<div class="w3-container w3-cell w3-padding-48 w3-pale-blue">
+<div class="w3-container w3-mobile w3-cell w3-padding-32 w3-pale-blue">
+<a href="https://www.linkedin.com/in/glenn-eychaner-81b585/" target="_blank">
+<IMG SRC="https://content.linkedin.com/content/dam/me/brand/en-us/brand-home/logos/In-Blue-Logo.png.original.png"
+ALT="LinkedIn(TM)" style="float:right;max-width:100px" class="w3-margin-left"></a>
 If you want to see my complete professional history, visit my <a
-href="https://www.linkedin.com/in/glenn-eychaner-81b585/" target="_blank">LinkedIn profile</a>.
-I don't participate in other social media.
+href="https://www.linkedin.com/in/glenn-eychaner-81b585/" target="_blank">LinkedIn&trade;
+profile</a>. I don't participate in other social media.
 </div>
 </div>
 <div class="w3-container w3-padding-16 w3-light-blue">
-<H3 style="text-align:center">Deep past projects</H3>
+<H3 style="text-align:center">Past work projects</H3>
 </div>
 <div class="w3-cell-row">
-<div class="w3-container w3-cell w3-padding-48 w3-pale-blue">
+<div class="w3-container w3-mobile w3-cell w3-padding-32 w3-pale-blue">
 <A HREF="sl9.html"><IMG SRC="sl9images/sl9rmov.gif" ALT="Movie of fragment R images"
 style="float:left" class="w3-margin-right">
 A sampling of images</A> of the Shoemaker-Levy 9 comet impact (fragments R and V) into
 Jupiter, taken at the <A HREF="http://www.bbso.njit.edu" target="_blank">Big Bear Solar
 Observatory</A>.
 </div>
-<div class="w3-container w3-cell w3-padding-48 w3-pale-blue">
+<div class="w3-container w3-mobile w3-cell w3-padding-32 w3-pale-blue">
 <IMG SRC="rthshn.gif" ALT="Earthshine" style="float:right;cursor:zoom-in;width:100%;max-width:100px"
-    onclick="onClick(this)" class="w3-border w3-padding-small w3-image">
+    onclick="onClick(this)" class="w3-border w3-padding-small w3-margin-left w3-image">
 An image of lunar earthshine, taken by me at the <A HREF="http://www.bbso.njit.edu"
 target="_blank">Big Bear Solar Observatory</A>, using an instrument I converted from a
-decomissioned solar fulldisk viewer with considerable help from machinist Jeff Nenow. The
+decommissioned solar fulldisk viewer with considerable help from machinist Jeff Nenow. The
 crescent moon is to the left, behind a very dark filter. The earthshine is to the right.
 Earthshine is visible to the naked eye when the moon is a thin crescent.
 </div>
 </div>
-<div class="w3-container w3-padding-8 w3-gray" style="align-content:right">
-<h5 style="text-align:right">There's no place like &Lambda;&#x030A;</h5>
+<div class="w3-container w3-gray">
+<h4 style="text-align:right">There's no place like
+<span class="w3-serif" style="font-size:larger">&Lambda;&#x030A;</span></h4>
 </div>
 <div id="modal01" class="w3-modal w3-center" onclick="this.style.display='none'">
 <div class="w3-modal-content"><img class="w3-center" id="img01" style="width:100%"></div>
