@@ -309,7 +309,7 @@ var spd6 = dw6**3*aether(6);
 var spd8 = dw8**3*aether(8);
 var lmv6 = wToLMv(lm6);
 var lmv8 = wToLMv(lm8);
-document.getElementById("dw6").innerHTML =dw6.toFixed(2);
+document.getElementById("dw6").innerHTML = dw6.toFixed(2);
 document.getElementById("dw8").innerHTML = dw8.toFixed(2);
 document.getElementById("lm6").innerHTML = lm6.toFixed(2);
 document.getElementById("lm8").innerHTML = lm8.toFixed(2);
@@ -352,7 +352,7 @@ function loadCharts() {
   noDragData = new google.visualization.DataTable();
   noDragData.addColumn('number', 'W');
   noDragData.addColumn('number', 'Speed');
-  for (val of noDrag) if (isFinite(val[0])) noDragData.addRow([val[0], val[1]]);
+  for (val of noDrag) noDragData.addRow([val[0], val[1]]);
   noDragOptions = {
     title: 'Generated Warp vs Apparent Speed',
     hAxis: {title: 'Generated Warp'},
@@ -374,7 +374,7 @@ function loadCharts() {
   dWarpData = new google.visualization.DataTable();
   dWarpData.addColumn('number', 'W');
   dWarpData.addColumn('number', 'Speed');
-  for (val of dWarp) if (isFinite(val[0])) dWarpData.addRow([val[0], val[2]]);
+  for (val of dWarp) if (isFinite(val[1])) dWarpData.addRow([val[0], val[2]]);
   dWarpOptions = {
     title: 'Delivered Warp vs Apparent Speed',
     hAxis: {title: 'Delivered Warp'},
@@ -387,7 +387,7 @@ function loadCharts() {
   wGenData.addColumn('number', '\u0174\u00B3');
   wGenData.addColumn('number', '\u0174\u00B2');
   wGenData.addColumn('number', '\u0174');
-  for (val of wGen) if (isFinite(val[1])) wGenData.addRow([val[1], val[2], val[3], val[4]]);
+  for (val of wGen) if (isFinite(val[0])) wGenData.addRow([val[1], val[2], val[3], val[4]]);
   wGenOptions = {
     title: 'Delivered Warp vs Apparent Speed',
     hAxis: {title: 'Delivered Warp'},
@@ -400,7 +400,7 @@ function loadCharts() {
   subCData.addColumn('number', 'W\u00B3');
   subCData.addColumn('number', 'W\u00B2');
   subCData.addColumn('number', 'W');
-  for (val of subC) if (isFinite(val[1])) subCData.addRow([val[0], val[1], val[2], val[3]]);
+  for (val of subC) subCData.addRow([val[0], val[1], val[2], val[3]]);
   subCOptions = {
     title: 'Warp vs Apparent Speed',
     hAxis: {title: 'Warp'},
@@ -411,7 +411,7 @@ function loadCharts() {
   aEthData = new google.visualization.DataTable();
   aEthData.addColumn('number', 'W');
   aEthData.addColumn('number', '\u00C6');
-  for (val of aEth) if (isFinite(val[1])) aEthData.addRow([val[0], val[1]]);
+  for (val of aEth) if (isFinite(val[0])) aEthData.addRow([val[0], val[1]]);
   aEthOptions = {
     title: 'Warp vs Apparent Speed',
     hAxis: {title: 'Warp', viewWindow: {min: -5, max: 20}},
