@@ -8,6 +8,12 @@
 </head>
 <body>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="warpspeed.js"></script>
+<script>
+warpspeed.initTables();
+google.charts.load('current',{packages:['corechart']});
+google.charts.setOnLoadCallback(initCharts);
+</script>
 <div class="w3-container w3-black">
   <div class="w3-content w3-white w3-padding-16">
     <div class="w3-center">
@@ -55,6 +61,7 @@ simplified Cochrane function:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=2>click for graph</td></tr></TFOOT>
   </table>
+  <script>document.getElementById("noDrag").innerHTML = warpspeed.noDragTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The result is referred to as an apparent speed because it does not have the same
@@ -99,6 +106,7 @@ results in:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=3>click for graph</td></tr></TFOOT>
   </table>
+  <script>document.getElementById("gWarp").innerHTML = warpspeed.gWarpTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The continuum drag becomes larger and larger as more power is applied, resulting in an
@@ -120,6 +128,7 @@ the 24<sup>th</sup> century:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=3>click for graph</td></tr></TFOOT>
   </table>
+  <script>document.getElementById("dWarp").innerHTML = warpspeed.dWarpTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Constitution-class and later vessels have Tertiary warp drives; hence their speed is
@@ -134,6 +143,7 @@ warp):</P>
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=5>click for graph</td></tr></TFOOT>
   </table>
+  <script>document.getElementById("wGen").innerHTML = warpspeed.wGenTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Primary warp was the first type of warp propulsion system developed, and it is still in
@@ -144,10 +154,11 @@ efficient at sub-light speeds:
   <table class="w3-table-all w3-centered" style="cursor:zoom-in" onclick="onClick('subCGraph')">
   <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH>
       <TH>&Wcirc;&sup2;&AElig;<i>c</i></TH><TH>&Wcirc;&AElig;<i>c</i></TH></TR></THEAD>
-  <TBODY id="subC"></TBODY>
+  <TBODY id="subc"></TBODY>
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=4>click for graph</td></tr></TFOOT>
   </table>
+  <script>document.getElementById("subc").innerHTML = warpspeed.subcTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 When Secondary warp drives were developed, the terminology of vessel design adopted the
@@ -169,6 +180,7 @@ have the following apparent speeds:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=2>click for graph</td></tr></TFOOT>
   </table>
+  <script>document.getElementById("aEth").innerHTML = warpspeed.aEthTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The speed of such a "Nullary" drive with no energy supplied would be 0.145 times the speed
@@ -207,13 +219,14 @@ impossible to complete:
 <div class="w3-content">
   <table class="w3-table-all w3-centered">
   <THEAD><TR class="w3-light-blue"><TH></TH><TH></TH><TH>W</TH><TH>6</TH><TH>8</TH>
-    <TH>W Gen.</TH><TH>6</TH><TH>8</TH></THEAD>
-  <THEAD><TR class="w3-light-blue"><TH></TH><TH></TH><TH>&Wcirc;</TH><TH id="dw6"></TH><TH id="dw8"></TH>
-    <TH>W Del.</TH><TH id="lm6"></TH><TH id="lm8"></TH></THEAD>
-  <THEAD><TR class="w3-light-blue"><TH></TH><TH></TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH><TH id="spd6"></TH><TH id="spd8"></TH>
-    <TH>&Sum;&int;W&sup3;<i>c</i></TH><TH id="lmv6">6</TH><TH id="lmv8">8</TH></THEAD>
-  <TBODY id="wTravel"></TBODY>
+    <TH>W Gen.</TH><TH>6</TH><TH>8</TH></TR></THEAD>
+  <THEAD><TR class="w3-light-blue" id="dist1"></TR></THEAD>
+  <THEAD><TR class="w3-light-blue" id="dist2"></TR></THEAD>
+  <TBODY id="wTrav"></TBODY>
   </table>
+  <script>document.getElementById("dist1").innerHTML = warpspeed.distTable1();</script>
+  <script>document.getElementById("dist2").innerHTML = warpspeed.distTable2();</script>
+  <script>document.getElementById("wTrav").innerHTML = warpspeed.wTravTable();</script>
 </div>
 </div></div>
 <div class="w3-container w3-gray">
@@ -225,217 +238,6 @@ impossible to complete:
     <div style="width:100%; padding-top:100%">
       <div id="modalChart" style="position:absolute;top:0;left:0;bottom:0;right:0">
 </div></div></div></div>
-<script>
-google.charts.load('current',{packages:['corechart']});
-google.charts.setOnLoadCallback(loadCharts);
-
-function aether(w) {
-  return isFinite(w) ? Math.E**(6*Math.tanh((w-1)/3)) : (w < 0 ? Math.E**(-6) : Math.E**(6));
-}
-function gWtodW(w) {
-  return isFinite(w) ? 10*Math.tanh(w*Math.atanh(1/10)) : 10;
-}
-function dWtogW(w) {
-  return Math.atanh(w/10)/Math.atanh(1/10);
-}
-function wTolmW(w) {
-  var a = Math.tan(3*Math.PI/8);
-  var s = 1 - (Math.sqrt(2)-1) * 9 / 2 + (Math.sqrt(2)+1) * 40 / 9;
-  return 10-(a/((w-s)+Math.sqrt(a**2+(w-s)**2-1)));
-}
-function wToLMv(w) {
-  return 6*(Math.E**w-(w**2/2+w+1));
-}
-function distToTime(v, d, u) {
-  var time = d/v * (u == "pc" ? 3.26156: 1);
-  if (time > 1) { return time.toFixed(2) + " y"; }
-  else time *= 365.2422;
-  if (time > 1) { return time.toFixed(2) + " d"; }
-  else time *= 24;
-  if (time > 1) { return time.toFixed(2) + " h"; }
-  else time *= 60;
-  return time.toFixed(2) + " m";
-}
-
-function checkInfin(x, fix) {
-  return (isFinite(x) ? ((fix != null) ? x.toFixed(fix) : x) : ((x < 0) ? "-&infin;" : "&infin;"))
-}
-let noDrag = [];
-for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30]) noDrag.push([w, w**3*aether(w)]);
-var tableContent = '';
-for (val of noDrag) tableContent += "<TR><TD>" + val[0] + "</TD><TD>" + Math.round(val[1]).toLocaleString() + "</TD></TR>";
-document.getElementById("noDrag").innerHTML = tableContent;
-
-let gWarp = [];
-for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, Infinity]) {
-  var dw = gWtodW(w);
-  gWarp.push([w, dw, dw**3*aether(w)]);
-}
-var tableContent = '';
-for (val of gWarp) tableContent += "<TR><TD>" + checkInfin(val[0], null) + "</TD><TD>"
-      + val[1].toFixed(2) + "</TD><TD>" + Math.round(val[2]).toLocaleString() + "</TD></TR>";
-document.getElementById("gWarp").innerHTML = tableContent;
-
-let dWarp = [];
-for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 9.5, 9.9, 9.99, 9.999, 10]) {
-  var gw = dWtogW(w);
-  dWarp.push([w, gw, w**3*aether(gw)]);
-}
-var tableContent = '';
-for (val of dWarp) tableContent += "<TR><TD>" + val[0] + "</TD><TD>"
-      + checkInfin(val[1], 2) + "</TD><TD>" + Math.round(val[2]).toLocaleString() + "</TD></TR>";
-document.getElementById("dWarp").innerHTML = tableContent;
-
-let wGen = [];
-for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, Infinity]) {
-  var dw = gWtodW(w);
-  wGen.push([w, dw, dw**3*aether(w), dw**2*aether(w), dw*aether(w)]);
-}
-var tableContent = "";
-for (val of wGen) tableContent += "<TR><TD>" + checkInfin(val[0], null) + "</TD><TD>"
-      + val[1].toFixed(2) + "</TD><TD>" + Math.round(val[2]).toLocaleString() + "</TD><TD>"
-      + Math.round(val[3]).toLocaleString() + "</TD><TD>" + Math.round(val[4]).toLocaleString() + "</TD></TR>";
-document.getElementById("wGen").innerHTML = tableContent;
-
-let subC = [];
-for (w of [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 0.999, 1, 1.001, 1.01, 1.1]) {
-  var dw = gWtodW(w);
-  subC.push([w, dw**3*aether(w), dw**2*aether(w), dw*aether(w)]);
-}
-var tableContent = "";
-for (val of subC) tableContent += "<TR><TD>" + val[0] + "</TD><TD>" + val[1].toFixed(3) + "</TD><TD>"
-    + val[2].toFixed(3) + "</TD><TD>" + val[3].toFixed(3) + "</TD></TR>";
-document.getElementById("subC").innerHTML = tableContent;
-
-let aEth = [];
-for (w of [-Infinity, -5, -1, -0.5, 0, 0.5, 1, 2, 4, 7, 10, 20, Infinity]) {
-  aEth.push([w, aether(w)]);
-}
-var tableContent = "";
-for (val of aEth) tableContent += "<TR><TD>" + checkInfin(val[0], null) + "</TD><TD>"
-      + val[1].toFixed(3) + "</TD></TR>";
-document.getElementById("aEth").innerHTML = tableContent;
-
-var dw6 = gWtodW(6);
-var dw8 = gWtodW(8);
-var lm6 = wTolmW(6);
-var lm8 = wTolmW(8);
-var spd6 = dw6**3*aether(6);
-var spd8 = dw8**3*aether(8);
-var lmv6 = wToLMv(lm6);
-var lmv8 = wToLMv(lm8);
-document.getElementById("dw6").innerHTML = dw6.toFixed(2);
-document.getElementById("dw8").innerHTML = dw8.toFixed(2);
-document.getElementById("lm6").innerHTML = lm6.toFixed(2);
-document.getElementById("lm8").innerHTML = lm8.toFixed(2);
-document.getElementById("spd6").innerHTML = Math.round(spd6).toLocaleString();
-document.getElementById("spd8").innerHTML = Math.round(spd8).toLocaleString();
-document.getElementById("lmv6").innerHTML = Math.round(lmv6).toLocaleString();
-document.getElementById("lmv8").innerHTML = Math.round(lmv8).toLocaleString();
-var distances = [
-  ["&alpha; Centauri", 4.37, "ly"],
-  ["UFP Core", 7, "pc"],
-  ["Rigel", 860, "ly"],
-  ["Deneb", 2615, "ly"],
-  ["Neut. Zones", 4750, "pc"],
-  ["LMC", 163000, "ly"],
-  ["Andromeda", 2500000, "ly"]
-];
-var tableContent = "";
-for (val of distances) tableContent += "<TR><TD>" + val[0] + "</TD><TD>" + val[1].toLocaleString()
-      + " " + val[2] + "</TD><TD></TD><TD>" + distToTime(spd6, val[1], val[2]) + "</TD><TD>" + distToTime(spd8, val[1], val[2])
-      + "</TD><TD></TD><TD>" + distToTime(lmv6, val[1], val[2]) + "</TD><TD>" + distToTime(lmv8, val[1], val[2]) + "</TD></TR>";
-document.getElementById("wTravel").innerHTML = tableContent;
-
-function onClick(element) {
-  document.getElementById("modalGraph").style.display = "block";
-  var chart = new google.visualization.LineChart(document.getElementById('modalChart'));
-  switch (element) {
-    case "noDragGraph": chart.draw(noDragData, noDragOptions); break;
-    case "gWarpGraph": chart.draw(gWarpData, gWarpOptions); break;
-    case "dWarpGraph": chart.draw(dWarpData, dWarpOptions); break;
-    case "wGenGraph": chart.draw(wGenData, wGenOptions); break;
-    case "subCGraph": chart.draw(subCData, subCOptions); break;
-    case "aEthGraph": chart.draw(aEthData, aEthOptions); break;
-  }
-}
-let noDragData, noDragOptions,
-    gWarpData, gWarpOptions,
-    dWarpData, dWarpOptions,
-    wGenData, wGenOptions;
-function loadCharts() {
-  noDragData = new google.visualization.DataTable();
-  noDragData.addColumn('number', 'W');
-  noDragData.addColumn('number', 'Speed');
-  for (val of noDrag) noDragData.addRow([val[0], val[1]]);
-  noDragOptions = {
-    title: 'Generated Warp vs Apparent Speed',
-    hAxis: {title: 'Generated Warp'},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
-    curveType: 'function',
-    legend: 'none'
-  };
-  gWarpData = new google.visualization.DataTable();
-  gWarpData.addColumn('number', 'W');
-  gWarpData.addColumn('number', 'Speed');
-  for (val of gWarp) if (isFinite(val[0])) gWarpData.addRow([val[0], val[2]]);
-  gWarpOptions = {
-    title: 'Generated Warp vs Apparent Speed',
-    hAxis: {title: 'Generated Warp'},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
-    curveType: 'function',
-    legend: 'none'
-  };
-  dWarpData = new google.visualization.DataTable();
-  dWarpData.addColumn('number', 'W');
-  dWarpData.addColumn('number', 'Speed');
-  for (val of dWarp) if (isFinite(val[1])) dWarpData.addRow([val[0], val[2]]);
-  dWarpOptions = {
-    title: 'Delivered Warp vs Apparent Speed',
-    hAxis: {title: 'Delivered Warp'},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
-    curveType: 'function',
-    legend: 'none'
-  };
-  wGenData = new google.visualization.DataTable();
-  wGenData.addColumn('number', 'W');
-  wGenData.addColumn('number', '\u0174\u00B3');
-  wGenData.addColumn('number', '\u0174\u00B2');
-  wGenData.addColumn('number', '\u0174');
-  for (val of wGen) if (isFinite(val[0])) wGenData.addRow([val[1], val[2], val[3], val[4]]);
-  wGenOptions = {
-    title: 'Delivered Warp vs Apparent Speed',
-    hAxis: {title: 'Delivered Warp'},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}, scaleType: 'log'},
-    curveType: 'function',
-    legend: { position: 'right' }
-  };
-  subCData = new google.visualization.DataTable();
-  subCData.addColumn('number', 'W');
-  subCData.addColumn('number', 'W\u00B3');
-  subCData.addColumn('number', 'W\u00B2');
-  subCData.addColumn('number', 'W');
-  for (val of subC) subCData.addRow([val[0], val[1], val[2], val[3]]);
-  subCOptions = {
-    title: 'Warp vs Apparent Speed',
-    hAxis: {title: 'Warp'},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
-    curveType: 'function',
-    legend: { position: 'right' }
-  };
-  aEthData = new google.visualization.DataTable();
-  aEthData.addColumn('number', 'W');
-  aEthData.addColumn('number', '\u00C6');
-  for (val of aEth) if (isFinite(val[0])) aEthData.addRow([val[0], val[1]]);
-  aEthOptions = {
-    title: 'Warp vs Apparent Speed',
-    hAxis: {title: 'Warp', viewWindow: {min: -5, max: 20}},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
-    curveType: 'function',
-    legend: 'none'
-  };
-}
-</script>
 </body>
 </html>
 
