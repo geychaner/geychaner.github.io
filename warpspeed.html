@@ -10,7 +10,6 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="warpspeed.js"></script>
 <script>
-warpspeed.initTables();
 google.charts.load('current',{packages:['corechart']});
 google.charts.setOnLoadCallback(initCharts);
 </script>
@@ -61,7 +60,7 @@ simplified Cochrane function:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=2>click for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("noDrag").innerHTML = warpspeed.noDragTable();</script>
+  <script>document.getElementById("noDrag").innerHTML = warpspeed.noDragTable;</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The result is referred to as an apparent speed because it does not have the same
@@ -106,7 +105,7 @@ results in:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=3>click for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("gWarp").innerHTML = warpspeed.gWarpTable();</script>
+  <script>document.getElementById("gWarp").innerHTML = warpspeed.gWarpTable;</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The continuum drag becomes larger and larger as more power is applied, resulting in an
@@ -122,13 +121,13 @@ the 24<sup>th</sup> century:
 <p class="w3-center" style="font-size:larger">W = arctanh(&Wcirc;/10)/arccoth(10)</P>
 </div>
 <div class="w3-content" style="width:50%">
-  <table class="w3-table-all w3-centered" style="cursor:zoom-in" onclick="onClick('dWarpGraph')">
+  <table class="w3-table-all w3-centered" style="cursor:zoom-in" onclick="onClick('eWarpGraph')">
   <THEAD><TR class="w3-light-blue"><TH>&Wcirc;</TH><TH>W</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH></TR></THEAD>
-  <TBODY id="dWarp"></TBODY>
+  <TBODY id="eWarp"></TBODY>
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=3>click for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("dWarp").innerHTML = warpspeed.dWarpTable();</script>
+  <script>document.getElementById("eWarp").innerHTML = warpspeed.eWarpTable;</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Constitution-class and later vessels have Tertiary warp drives; hence their speed is
@@ -136,14 +135,14 @@ proportional to &Wcirc;<sup>3</sup>. Simpler warp drives can also be constructed
 generate speeds proportional to &Wcirc; (Primary warp) or &Wcirc;<sup>2</sup> (Secondary
 warp):</P>
 <div class="w3-content" style="width:50%">
-  <table class="w3-table-all w3-centered" style="cursor:zoom-in" onclick="onClick('wGenGraph')">
+  <table class="w3-table-all w3-centered" style="cursor:zoom-in" onclick="onClick('wTypeGraph')">
   <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH>
       <TH>&Wcirc;&sup2;&AElig;<i>c</i></TH><TH>&Wcirc;&AElig;<i>c</i></TH></TR></THEAD>
-  <TBODY id="wGen"></TBODY>
+  <TBODY id="wTyp"></TBODY>
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=5>click for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("wGen").innerHTML = warpspeed.wGenTable();</script>
+  <script>document.getElementById("wTyp").innerHTML = warpspeed.wTypesTable;</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Primary warp was the first type of warp propulsion system developed, and it is still in
@@ -151,14 +150,14 @@ use on later vessels as part of the Impulse drive subsystem, because it is far m
 efficient at sub-light speeds:
 </p>
 <div class="w3-content" style="width:50%">
-  <table class="w3-table-all w3-centered" style="cursor:zoom-in" onclick="onClick('subCGraph')">
+  <table class="w3-table-all w3-centered" style="cursor:zoom-in" onclick="onClick('subLtGraph')">
   <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH>
       <TH>&Wcirc;&sup2;&AElig;<i>c</i></TH><TH>&Wcirc;&AElig;<i>c</i></TH></TR></THEAD>
-  <TBODY id="subc"></TBODY>
+  <TBODY id="sublt"></TBODY>
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=4>click for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("subc").innerHTML = warpspeed.subcTable();</script>
+  <script>document.getElementById("sublt").innerHTML = warpspeed.subLightTable;</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 When Secondary warp drives were developed, the terminology of vessel design adopted the
@@ -174,13 +173,13 @@ warp drive proportional to W<sup>0</sup> (which is equal to 1 for all values of 
 have the following apparent speeds:
 </p>
 <div class="w3-content" style="width:50%">
-  <table class="w3-table-all w3-centered" style="cursor:zoom-in" onclick="onClick('aEthGraph')">
+  <table class="w3-table-all w3-centered" style="cursor:zoom-in" onclick="onClick('wZeroGraph')">
   <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&AElig;<i>c</i></TH></THEAD>
-  <TBODY id="aEth"></TBODY>
+  <TBODY id="wZero"></TBODY>
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=2>click for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("aEth").innerHTML = warpspeed.aEthTable();</script>
+  <script>document.getElementById("wZero").innerHTML = warpspeed.wZeroTable;</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The speed of such a "Nullary" drive with no energy supplied would be 0.145 times the speed
@@ -218,15 +217,21 @@ impossible to complete:
 </P>
 <div class="w3-content">
   <table class="w3-table-all w3-centered">
-  <THEAD><TR class="w3-light-blue"><TH></TH><TH></TH><TH>W</TH><TH>6</TH><TH>8</TH>
-    <TH>W Gen.</TH><TH>6</TH><TH>8</TH></TR></THEAD>
+  <THEAD><TR class="w3-light-blue"><TH></TH><TH></TH>
+         <TH>W</TH><TH id="mxc1"></TH><TH id="mxe1"></TH>
+         <TH>W Gen.</TH><TH id="mxc2"></TH><TH id="mxe2"></TH></TR></THEAD>
   <THEAD><TR class="w3-light-blue" id="dist1"></TR></THEAD>
   <THEAD><TR class="w3-light-blue" id="dist2"></TR></THEAD>
   <TBODY id="wTrav"></TBODY>
   </table>
-  <script>document.getElementById("dist1").innerHTML = warpspeed.distTable1();</script>
-  <script>document.getElementById("dist2").innerHTML = warpspeed.distTable2();</script>
-  <script>document.getElementById("wTrav").innerHTML = warpspeed.wTravTable();</script>
+  <script>
+  document.getElementById("mxc1").innerHTML = warpspeed.maxCruise;
+  document.getElementById("mxe1").innerHTML = warpspeed.maxEmer;
+  document.getElementById("mxc2").innerHTML = warpspeed.maxCruise;
+  document.getElementById("mxe2").innerHTML = warpspeed.maxEmer;
+  document.getElementById("dist1").innerHTML = warpspeed.distThead1;
+  document.getElementById("dist2").innerHTML = warpspeed.distThead2;
+  document.getElementById("wTrav").innerHTML = warpspeed.wTravTable;</script>
 </div>
 </div></div>
 <div class="w3-container w3-gray">

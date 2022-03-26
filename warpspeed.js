@@ -4,10 +4,10 @@ function onClick(element) {
   switch (element) {
     case "noDragGraph": chart.draw(warpspeed.noDragData, warpspeed.noDragOptions); break;
     case "gWarpGraph": chart.draw(warpspeed.gWarpData, warpspeed.gWarpOptions); break;
-    case "dWarpGraph": chart.draw(warpspeed.dWarpData, warpspeed.dWarpOptions); break;
-    case "wGenGraph": chart.draw(warpspeed.wGenData, warpspeed.wGenOptions); break;
-    case "subCGraph": chart.draw(warpspeed.subCData, warpspeed.subCOptions); break;
-    case "aEthGraph": chart.draw(warpspeed.aEthData, warpspeed.aEthOptions); break;
+    case "eWarpGraph": chart.draw(warpspeed.eWarpData, warpspeed.eWarpOptions); break;
+    case "wTypeGraph": chart.draw(warpspeed.wTypeData, warpspeed.wTypeOptions); break;
+    case "subLtGraph": chart.draw(warpspeed.subLtData, warpspeed.subLtOptions); break;
+    case "wZeroGraph": chart.draw(warpspeed.wZeroData, warpspeed.wZeroOptions); break;
   }
 }
 
@@ -19,43 +19,132 @@ function initCharts() {
   warpspeed.gWarpData = new google.visualization.DataTable();
   warpspeed.gWarpData.addColumn('number', 'W');
   warpspeed.gWarpData.addColumn('number', 'Speed');
-  for (val of warpspeed.gWarp) if (isFinite(val[0])) warpspeed.gWarpData.addRow([val[0], val[2]]);
-  warpspeed.dWarpData = new google.visualization.DataTable();
-  warpspeed.dWarpData.addColumn('number', 'W');
-  warpspeed.dWarpData.addColumn('number', 'Speed');
-  for (val of warpspeed.dWarp) if (isFinite(val[1])) warpspeed.dWarpData.addRow([val[0], val[2]]);
-  warpspeed.wGenData = new google.visualization.DataTable();
-  warpspeed.wGenData.addColumn('number', 'W');
-  warpspeed.wGenData.addColumn('number', '\u0174\u00B3');
-  warpspeed.wGenData.addColumn('number', '\u0174\u00B2');
-  warpspeed.wGenData.addColumn('number', '\u0174');
-  for (val of warpspeed.wGen) if (isFinite(val[0])) warpspeed.wGenData.addRow([val[1], val[2], val[3], val[4]]);
-  warpspeed.subCData = new google.visualization.DataTable();
-  warpspeed.subCData.addColumn('number', 'W');
-  warpspeed.subCData.addColumn('number', 'W\u00B3');
-  warpspeed.subCData.addColumn('number', 'W\u00B2');
-  warpspeed.subCData.addColumn('number', 'W');
-  for (val of warpspeed.subC) warpspeed.subCData.addRow([val[0], val[1], val[2], val[3]]);
-  warpspeed.aEthData = new google.visualization.DataTable();
-  warpspeed.aEthData.addColumn('number', 'W');
-  warpspeed.aEthData.addColumn('number', '\u00C6');
-  for (val of warpspeed.aEth) if (isFinite(val[0])) warpspeed.aEthData.addRow([val[0], val[1]]);
+  for (val of warpspeed.genWarp) if (isFinite(val[0])) warpspeed.gWarpData.addRow([val[0], val[2]]);
+  warpspeed.eWarpData = new google.visualization.DataTable();
+  warpspeed.eWarpData.addColumn('number', 'W');
+  warpspeed.eWarpData.addColumn('number', 'Speed');
+  for (val of warpspeed.effWarp) if (isFinite(val[1])) warpspeed.eWarpData.addRow([val[0], val[2]]);
+  warpspeed.wTypeData = new google.visualization.DataTable();
+  warpspeed.wTypeData.addColumn('number', 'W');
+  warpspeed.wTypeData.addColumn('number', '\u0174\u00B3');
+  warpspeed.wTypeData.addColumn('number', '\u0174\u00B2');
+  warpspeed.wTypeData.addColumn('number', '\u0174');
+  for (val of warpspeed.wTypes) if (isFinite(val[0])) warpspeed.wTypeData.addRow([val[1], val[2], val[3], val[4]]);
+  warpspeed.subLtData = new google.visualization.DataTable();
+  warpspeed.subLtData.addColumn('number', 'W');
+  warpspeed.subLtData.addColumn('number', 'W\u00B3');
+  warpspeed.subLtData.addColumn('number', 'W\u00B2');
+  warpspeed.subLtData.addColumn('number', 'W');
+  for (val of warpspeed.subLight) warpspeed.subLtData.addRow([val[0], val[1], val[2], val[3]]);
+  warpspeed.wZeroData = new google.visualization.DataTable();
+  warpspeed.wZeroData.addColumn('number', 'W');
+  warpspeed.wZeroData.addColumn('number', '\u00C6');
+  for (val of warpspeed.wZero) if (isFinite(val[0])) warpspeed.wZeroData.addRow([val[0], val[1]]);
 }
 
 const warpspeed = {
-  noDrag: [],
-  gWarp: [],
-  dWarp: [],
-  wGen: [],
-  subC: [],
-  aEth: [],
-  distW: [],
-  distSp: [],
+  // conversion functions
+  aether: function(w) {
+    return isFinite(w) ? Math.E**(6*Math.tanh((w-1)/3)) : (w < 0 ? Math.E**(-6) : Math.E**(6));
+  },
+  genW2effW: function(w) {
+    return isFinite(w) ? 10*Math.tanh(w*Math.atanh(1/10)) : 10;
+  },
+  effW2genW: function(w) {
+    return Math.atanh(w/10)/Math.atanh(1/10);
+  },
+  w2spd: function(genW, effW, type) {
+    return effW**type*this.aether(genW);
+  },
+  genW2delW: function(w) {
+    var a = Math.tan(3*Math.PI/8);
+    var s = 1 - (Math.sqrt(2)-1) * 9 / 2 + (Math.sqrt(2)+1) * 40 / 9;
+    return 10-(a/((w-s)+Math.sqrt(a**2+(w-s)**2-1)));
+  },
+  delW2spd: function(w) {
+    return 6*(Math.E**w-(w**2/2+w+1));
+  },
+  distToTime: function(v, d, u) {
+    var time = d/v * (u == "pc" ? 3.26156: 1);
+    if (time > 1) { return time.toFixed(2) + " y"; }
+    else time *= 365.2422;
+    if (time > 1) { return time.toFixed(2) + " d"; }
+    else time *= 24;
+    if (time > 1) { return time.toFixed(2) + " h"; }
+    else time *= 60;
+    return time.toFixed(2) + " m";
+  },
+  checkInfin: function(x, fix) {
+    return (isFinite(x) ? ((fix != null) ? x.toFixed(fix) : x) : ((x < 0) ? "-&infin;" : "&infin;"))
+  },
+  // cached data
+  data: {
+    noDrag: [],
+    gWarp: [],
+    fWarp: [],
+    wTypes: [],
+    subLt: [],
+    wZero: [],
+    distW: [],
+    distSp: []
+  },
+  // data accessors
+  get noDrag() {
+    if (this.data.noDrag.length == 0) {
+      for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30]) this.data.noDrag.push([w, w**3*this.aether(w)]);
+    }
+    return this.data.noDrag;
+  },
+  get genWarp() {
+    if (this.data.gWarp.length == 0) {
+      for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, Infinity]) {
+        var ew = this.genW2effW(w);
+        this.data.gWarp.push([w, ew, this.w2spd(w, ew, 3)]);
+      }
+    }
+    return this.data.gWarp;
+  },
+  get effWarp() {
+    if (this.data.fWarp.length == 0) {
+      for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 9.5, 9.9, 9.99, 9.999, 10]) {
+        var gw = this.effW2genW(w);
+        this.data.fWarp.push([w, gw, this.w2spd(gw, w, 3)]);
+      }
+    }
+    return this.data.fWarp;
+  },
+  get wTypes() {
+    if (this.data.wTypes.length == 0) {
+      for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, Infinity]) {
+        var ew = this.genW2effW(w);
+        this.data.wTypes.push([w, ew, this.w2spd(w, ew, 3), this.w2spd(w, ew, 2), this.w2spd(w, ew, 1)]);
+      }
+    }
+    return this.data.wTypes;
+  },
+  get subLight() {
+    if (this.data.subLt.length == 0) {
+      for (w of [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 0.999, 1, 1.001, 1.01, 1.1]) {
+        var ew = this.genW2effW(w);
+        this.data.subLt.push([w, this.w2spd(w, ew, 3), this.w2spd(w, ew, 2), this.w2spd(w, ew, 1)]);
+      }
+    }
+    return this.data.subLt;
+  },
+  get wZero() {
+    if (this.data.wZero.length == 0) {
+      for (w of [-Infinity, -5, -1, -0.5, 0, 0.5, 1, 2, 4, 7, 10, 20, Infinity])
+          this.data.wZero.push([w, this.aether(w)]);
+    }
+    return this.data.wZero;
+  },
+  // Graph data
   noDragData: null,
   gWarpData: null,
-  dWarpData: null,
-  wGenData: null,
-  aEthData: null,
+  eWarpData: null,
+  wTypeData: null,
+  subLtData: null,
+  wZeroData: null,
   noDragOptions: {
     title: 'Generated Warp vs Apparent Speed',
     hAxis: {title: 'Generated Warp'},
@@ -70,172 +159,107 @@ const warpspeed = {
     curveType: 'function',
     legend: 'none'
   },
-  dWarpOptions: {
-    title: 'Delivered Warp vs Apparent Speed',
-    hAxis: {title: 'Delivered Warp'},
+  eWarpOptions: {
+    title: 'Effective Warp vs Apparent Speed',
+    hAxis: {title: 'Effective Warp'},
     vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
     curveType: 'function',
     legend: 'none'
   },
-  wGenOptions: {
+  wTypeOptions: {
     title: 'Delivered Warp vs Apparent Speed',
     hAxis: {title: 'Delivered Warp'},
     vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}, scaleType: 'log'},
     curveType: 'function',
     legend: { position: 'right' }
   },
-  subCOptions: {
+  subLtOptions: {
     title: 'Warp vs Apparent Speed',
     hAxis: {title: 'Warp'},
     vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
     curveType: 'function',
     legend: { position: 'right' }
   },
-  aEthOptions: {
+  wZeroOptions: {
     title: 'Warp vs Apparent Speed',
     hAxis: {title: 'Warp', viewWindow: {min: -5, max: 20}},
     vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
     curveType: 'function',
     legend: 'none'
   },
-
-  initTables: function() {
-    for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30])
-        this.noDrag.push([w, w**3*this.aether(w)]);
-    for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, Infinity]) {
-      var dw = this.gWtodW(w);
-      this.gWarp.push([w, dw, dw**3*this.aether(w)]);
-    }
-    for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 9.5, 9.9, 9.99, 9.999, 10]) {
-      var gw = this.dWtogW(w);
-      this.dWarp.push([w, gw, w**3*this.aether(gw)]);
-    }
-    for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, Infinity]) {
-      var dw = this.gWtodW(w);
-      this.wGen.push([w, dw, dw**3*this.aether(w), dw**2*this.aether(w), dw*this.aether(w)]);
-    }
-    for (w of [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 0.999, 1, 1.001, 1.01, 1.1]) {
-      var dw = this.gWtodW(w);
-      this.subC.push([w, dw**3*this.aether(w), dw**2*this.aether(w), dw*this.aether(w)]);
-    }
-    for (w of [-Infinity, -5, -1, -0.5, 0, 0.5, 1, 2, 4, 7, 10, 20, Infinity]) {
-      this.aEth.push([w, this.aether(w)]);
-    }
-    this.distW = [ this.gWtodW(6), this.gWtodW(8), this.wTolmW(6), this.wTolmW(8) ];
-    this.distSp = [ this.distW[0]**3*this.aether(6), this.distW[1]**3*this.aether(8),
-              this.wToLMv(this.distW[2]), this.wToLMv(this.distW[3]) ];
-  },
-
-  aether: function(w) {
-    return isFinite(w) ? Math.E**(6*Math.tanh((w-1)/3)) : (w < 0 ? Math.E**(-6) : Math.E**(6));
-  },
-
-  gWtodW: function(w) {
-    return isFinite(w) ? 10*Math.tanh(w*Math.atanh(1/10)) : 10;
-  },
-
-  dWtogW: function(w) {
-    return Math.atanh(w/10)/Math.atanh(1/10);
-  },
-
-  wTolmW: function(w) {
-    var a = Math.tan(3*Math.PI/8);
-    var s = 1 - (Math.sqrt(2)-1) * 9 / 2 + (Math.sqrt(2)+1) * 40 / 9;
-    return 10-(a/((w-s)+Math.sqrt(a**2+(w-s)**2-1)));
-  },
-
-  wToLMv: function(w) {
-    return 6*(Math.E**w-(w**2/2+w+1));
-  },
-
-  distToTime: function(v, d, u) {
-    var time = d/v * (u == "pc" ? 3.26156: 1);
-    if (time > 1) { return time.toFixed(2) + " y"; }
-    else time *= 365.2422;
-    if (time > 1) { return time.toFixed(2) + " d"; }
-    else time *= 24;
-    if (time > 1) { return time.toFixed(2) + " h"; }
-    else time *= 60;
-    return time.toFixed(2) + " m";
-  },
-
-  checkInfin: function(x, fix) {
-    return (isFinite(x) ? ((fix != null) ? x.toFixed(fix) : x) : ((x < 0) ? "-&infin;" : "&infin;"))
-  },
-
-  noDragTable: function() {
+  // table getters
+  get noDragTable() {
     var tableContent = '';
     for (val of this.noDrag) tableContent += "<TR><TD>" + val[0] + "</TD><TD>"
         + Math.round(val[1]).toLocaleString() + "</TD></TR>";
     return tableContent;
   },
-
-  gWarpTable: function() {
+  get gWarpTable() {
     var tableContent = '';
-    for (val of this.gWarp) tableContent += "<TR><TD>" + this.checkInfin(val[0], null) + "</TD><TD>"
+    for (val of this.genWarp) tableContent += "<TR><TD>" + this.checkInfin(val[0], null) + "</TD><TD>"
         + val[1].toFixed(2) + "</TD><TD>" + Math.round(val[2]).toLocaleString() + "</TD></TR>";
     return tableContent;
   },
-
-  dWarpTable: function() {
+  get eWarpTable() {
     var tableContent = '';
-    for (val of this.dWarp) tableContent += "<TR><TD>" + val[0] + "</TD><TD>" + this.checkInfin(val[1], 2)
+    for (val of this.effWarp) tableContent += "<TR><TD>" + val[0] + "</TD><TD>" + this.checkInfin(val[1], 2)
         + "</TD><TD>" + Math.round(val[2]).toLocaleString() + "</TD></TR>";
     return tableContent;
   },
-
-  wGenTable: function() {
+  get wTypesTable() {
     var tableContent = "";
-    for (val of this.wGen) tableContent += "<TR><TD>" + this.checkInfin(val[0], null) + "</TD><TD>"
+    for (val of this.wTypes) tableContent += "<TR><TD>" + this.checkInfin(val[0], null) + "</TD><TD>"
           + val[1].toFixed(2) + "</TD><TD>" + Math.round(val[2]).toLocaleString() + "</TD><TD>"
           + Math.round(val[3]).toLocaleString() + "</TD><TD>" + Math.round(val[4]).toLocaleString() + "</TD></TR>";
     return tableContent;
   },
-
-  subcTable: function() {
+  get subLightTable() {
     var tableContent = "";
-    for (val of this.subC) tableContent += "<TR><TD>" + val[0] + "</TD><TD>" + val[1].toFixed(3) + "</TD><TD>"
+    for (val of this.subLight) tableContent += "<TR><TD>" + val[0] + "</TD><TD>" + val[1].toFixed(3) + "</TD><TD>"
         + val[2].toFixed(3) + "</TD><TD>" + val[3].toFixed(3) + "</TD></TR>";
     return tableContent;
   },
-
-  aEthTable: function() {
+  get wZeroTable() {
     var tableContent = "";
-    for (val of this.aEth) tableContent += "<TR><TD>" + this.checkInfin(val[0], null) + "</TD><TD>"
+    for (val of this.wZero) tableContent += "<TR><TD>" + this.checkInfin(val[0], null) + "</TD><TD>"
         + val[1].toFixed(3) + "</TD></TR>";
     return tableContent;
   },
-
-  distTable1: function() {
-    return "<TH></TH><TH></TH><TH>&Wcirc;</TH><TH>" + this.distW[0].toFixed(2) + "</TH><TH>"
-        + this.distW[1].toFixed(2) + "</TH><TH>W Del.</TH><TH>" + this.distW[2].toFixed(2)
-        + "</TH><TH>" + this.distW[3].toFixed(2) + "</TH>"
+  maxCruise: 6,
+  maxEmer: 8,
+  get distThead1() {
+    if (this.data.distW.length == 0) this.data.distW = [ this.genW2effW(this.maxCruise),
+        this.genW2effW(this.maxEmer), this.genW2delW(this.maxCruise), this.genW2delW(this.maxEmer) ];
+    return "<TH></TH><TH></TH><TH>&Wcirc;</TH><TH>" + this.data.distW[0].toFixed(2) + "</TH><TH>"
+        + this.data.distW[1].toFixed(2) + "</TH><TH>W Del.</TH><TH>" + this.data.distW[2].toFixed(2)
+        + "</TH><TH>" + this.data.distW[3].toFixed(2) + "</TH>";
   },
-
-  distTable2: function() {
+  get distThead2() {
+    if (this.data.distSp.length == 0) this.data.distSp = [
+        this.w2spd(this.data.distW[0], this.maxCruise, 3), this.w2spd(this.data.distW[1], this.maxEmer, 3),
+        this.delW2spd(this.data.distW[2]), this.delW2spd(this.data.distW[3]) ];
     return "<TH></TH><TH></TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH><TH>"
-        + Math.round(this.distSp[0]).toLocaleString() + "</TH><TH>"
-        + Math.round(this.distSp[1]).toLocaleString() + "</TH><TH>&Sum;&int;W&sup3;<i>c</i></TH><TH>"
-        + Math.round(this.distSp[2]).toLocaleString() + "</TH><TH>"
-        + Math.round(this.distSp[3]).toLocaleString() + "</TH>"
+        + Math.round(this.data.distSp[0]).toLocaleString() + "</TH><TH>"
+        + Math.round(this.data.distSp[1]).toLocaleString() + "</TH><TH>&Sum;&int;W&sup3;<i>c</i></TH><TH>"
+        + Math.round(this.data.distSp[2]).toLocaleString() + "</TH><TH>"
+        + Math.round(this.data.distSp[3]).toLocaleString() + "</TH>";
   },
-
-  wTravTable: function() {
-    var distances = [
-      ["&alpha; Centauri", 4.37, "ly"],
-      ["UFP Core", 7, "pc"],
-      ["Rigel", 860, "ly"],
-      ["Deneb", 2615, "ly"],
-      ["Neut. Zones", 4750, "pc"],
-      ["LMC", 163000, "ly"],
-      ["Andromeda", 2500000, "ly"]
-    ];
+  distances: [
+    ["&alpha; Centauri", 4.37, "ly"],
+    ["UFP Core", 7, "pc"],
+    ["Rigel", 860, "ly"],
+    ["Deneb", 2615, "ly"],
+    ["Neut. Zones", 4750, "pc"],
+    ["LMC", 163000, "ly"],
+    ["Andromeda", 2500000, "ly"]
+  ],
+  get wTravTable() {
     var tableContent = "";
-    for (val of distances) tableContent += "<TR><TD>" + val[0] + "</TD><TD>" + val[1].toLocaleString()
-          + " " + val[2] + "</TD><TD></TD><TD>" + this.distToTime(this.distSp[0], val[1], val[2])
-          + "</TD><TD>" + warpspeed.distToTime(this.distSp[1], val[1], val[2])
-          + "</TD><TD></TD><TD>" + warpspeed.distToTime(this.distSp[2], val[1], val[2])
-          + "</TD><TD>" + warpspeed.distToTime(this.distSp[3], val[1], val[2]) + "</TD></TR>";
+    for (val of this.distances) tableContent += "<TR><TD>" + val[0] + "</TD><TD>" + val[1].toLocaleString()
+          + " " + val[2] + "</TD><TD></TD><TD>" + this.distToTime(this.data.distSp[0], val[1], val[2])
+          + "</TD><TD>" + warpspeed.distToTime(this.data.distSp[1], val[1], val[2])
+          + "</TD><TD></TD><TD>" + warpspeed.distToTime(this.data.distSp[2], val[1], val[2])
+          + "</TD><TD>" + warpspeed.distToTime(this.data.distSp[3], val[1], val[2]) + "</TD></TR>";
     return tableContent;
   },
 };
