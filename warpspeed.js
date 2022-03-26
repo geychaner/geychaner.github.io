@@ -40,6 +40,7 @@ function initCharts() {
   warpspeed.wZeroData.addColumn('number', 'W');
   warpspeed.wZeroData.addColumn('number', '\u00C6');
   for (val of warpspeed.wZero) if (isFinite(val[0])) warpspeed.wZeroData.addRow([val[0], val[1]]);
+  // This should also set up the onClick and cursor on each of the tables so there's no race condition
 }
 
 const warpspeed = {
