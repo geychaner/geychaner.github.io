@@ -145,18 +145,6 @@ const warpspeed = {
     }
     return this.data.wZero;
   },
-  get distW() {
-    if (this.data.distW.length == 0) this.data.distW = [
-        this.genW2effW(this.maxCruise), this.genW2effW(this.maxEmer),
-        this.genW2delW(this.maxCruise), this.genW2delW(this.maxEmer) ];
-    return this.data.distW;
-  },
-  get distSp() {
-    if (this.data.distSp.length == 0) this.data.distSp = [
-        this.w2spd(this.data.distW[0], this.maxCruise, 3), this.w2spd(this.data.distW[1], this.maxEmer, 3),
-        this.delW2spd(this.data.distW[2]),                 this.delW2spd(this.data.distW[3]) ];
-    return this.data.distSp;
-  },
   // Graph data
   noDragData: null,
   gWarpData: null,
@@ -258,6 +246,18 @@ const warpspeed = {
   },
   maxCruise: 6,
   maxEmer: 8,
+  get distW() {
+    if (this.data.distW.length == 0) this.data.distW = [
+        this.genW2effW(this.maxCruise), this.genW2effW(this.maxEmer),
+        this.genW2delW(this.maxCruise), this.genW2delW(this.maxEmer) ];
+    return this.data.distW;
+  },
+  get distSp() {
+    if (this.data.distSp.length == 0) this.data.distSp = [
+        this.w2spd(this.data.distW[0], this.maxCruise, 3), this.w2spd(this.data.distW[1], this.maxEmer, 3),
+        this.delW2spd(this.data.distW[2]),                 this.delW2spd(this.data.distW[3]) ];
+    return this.data.distSp;
+  },
   wTravHead: function() {
     let tableHead = document.getElementById("wTravHead");
     for (rowData of [ ["", "", "W", this.maxCruise, this.maxEmer, "W Gen.",  this.maxCruise, this.maxEmer ],
