@@ -60,7 +60,7 @@ simplified Cochrane function:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=2>click table for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("noDrag").innerHTML = warpspeed.noDragTable;</script>
+  <script>warpspeed.noDragTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The result is referred to as an apparent speed because it does not have the same
@@ -105,7 +105,7 @@ results in:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=3>click table for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("gWarp").innerHTML = warpspeed.gWarpTable;</script>
+  <script>warpspeed.gWarpTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The continuum drag becomes larger and larger as more power is applied, resulting in an
@@ -127,7 +127,7 @@ the 24<sup>th</sup> century:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=3>click table for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("eWarp").innerHTML = warpspeed.eWarpTable;</script>
+  <script>warpspeed.eWarpTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Constitution-class and later vessels have Tertiary warp drives; hence their speed is
@@ -142,7 +142,7 @@ warp):</P>
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=5>click table for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("wType").innerHTML = warpspeed.wTypesTable;</script>
+  <script>warpspeed.wTypesTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Primary warp was the first type of warp propulsion system developed, and it is still in
@@ -157,7 +157,7 @@ efficient at sub-light speeds:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=4>click table for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("subLt").innerHTML = warpspeed.subLightTable;</script>
+  <script>warpspeed.subLightTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 When Secondary warp drives were developed, the terminology of vessel design adopted the
@@ -179,7 +179,7 @@ have the following apparent speeds:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=2>click table for graph</td></tr></TFOOT>
   </table>
-  <script>document.getElementById("wZero").innerHTML = warpspeed.wZeroTable;</script>
+  <script>warpspeed.wZeroTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The speed of such a "Nullary" drive with no energy supplied would be 0.145 times the speed
@@ -217,21 +217,12 @@ impossible to complete:
 </P>
 <div class="w3-content">
   <table class="w3-table-all w3-centered">
-  <THEAD><TR class="w3-light-blue"><TH></TH><TH></TH>
-         <TH>W</TH><TH id="mxc1"></TH><TH id="mxe1"></TH>
-         <TH>W Gen.</TH><TH id="mxc2"></TH><TH id="mxe2"></TH></TR></THEAD>
-  <THEAD><TR class="w3-light-blue" id="dist1"></TR></THEAD>
-  <THEAD><TR class="w3-light-blue" id="dist2"></TR></THEAD>
+  <THEAD id="wTravHead"></THEAD>
   <TBODY id="wTrav"></TBODY>
   </table>
   <script>
-  document.getElementById("mxc1").innerHTML = warpspeed.maxCruise;
-  document.getElementById("mxe1").innerHTML = warpspeed.maxEmer;
-  document.getElementById("mxc2").innerHTML = warpspeed.maxCruise;
-  document.getElementById("mxe2").innerHTML = warpspeed.maxEmer;
-  document.getElementById("dist1").innerHTML = warpspeed.distThead1;
-  document.getElementById("dist2").innerHTML = warpspeed.distThead2;
-  document.getElementById("wTrav").innerHTML = warpspeed.wTravTable;
+  warpspeed.wTravHead();
+  warpspeed.wTravTable();
   </script>
 </div>
 </div></div>
