@@ -145,6 +145,29 @@ const warpspeed = {
     }
     return this.data.wZero;
   },
+  maxCruise: 6,
+  maxEmer: 8,
+  get distW() {
+    if (this.data.distW.length == 0) this.data.distW = [
+        this.genW2effW(this.maxCruise), this.genW2effW(this.maxEmer),
+        this.genW2delW(this.maxCruise), this.genW2delW(this.maxEmer) ];
+    return this.data.distW;
+  },
+  get distSp() {
+    if (this.data.distSp.length == 0) this.data.distSp = [
+        this.w2spd(this.data.distW[0], this.maxCruise, 3), this.w2spd(this.data.distW[1], this.maxEmer, 3),
+        this.delW2spd(this.data.distW[2]),                 this.delW2spd(this.data.distW[3]) ];
+    return this.data.distSp;
+  },
+  distances: [
+    ["&alpha; Centauri", 4.37, "ly"],
+    ["UFP Core", 7, "pc"],
+    ["Rigel", 860, "ly"],
+    ["Deneb", 2615, "ly"],
+    ["Neut. Zones", 4750, "pc"],
+    ["LMC", 163000, "ly"],
+    ["Andromeda", 2500000, "ly"]
+  ],
   // Graph data
   noDragData: null,
   gWarpData: null,
@@ -194,7 +217,7 @@ const warpspeed = {
     curveType: 'function',
     legend: 'none'
   },
-  // table getters
+  // table creators
   noDragTable: function() {
     let tableBody = document.getElementById("noDrag");
     for (val of this.noDrag) {
@@ -244,20 +267,6 @@ const warpspeed = {
           row.insertCell().appendChild(document.createTextNode(c));
     }
   },
-  maxCruise: 6,
-  maxEmer: 8,
-  get distW() {
-    if (this.data.distW.length == 0) this.data.distW = [
-        this.genW2effW(this.maxCruise), this.genW2effW(this.maxEmer),
-        this.genW2delW(this.maxCruise), this.genW2delW(this.maxEmer) ];
-    return this.data.distW;
-  },
-  get distSp() {
-    if (this.data.distSp.length == 0) this.data.distSp = [
-        this.w2spd(this.data.distW[0], this.maxCruise, 3), this.w2spd(this.data.distW[1], this.maxEmer, 3),
-        this.delW2spd(this.data.distW[2]),                 this.delW2spd(this.data.distW[3]) ];
-    return this.data.distSp;
-  },
   wTravHead: function() {
     let tableHead = document.getElementById("wTravHead");
     for (rowData of [ ["", "", "W", this.maxCruise, this.maxEmer, "W Gen.",  this.maxCruise, this.maxEmer ],
@@ -278,15 +287,6 @@ const warpspeed = {
       }
     }
   },
-  distances: [
-    ["&alpha; Centauri", 4.37, "ly"],
-    ["UFP Core", 7, "pc"],
-    ["Rigel", 860, "ly"],
-    ["Deneb", 2615, "ly"],
-    ["Neut. Zones", 4750, "pc"],
-    ["LMC", 163000, "ly"],
-    ["Andromeda", 2500000, "ly"]
-  ],
   wTravTable: function() {
     let tableBody = document.getElementById("wTrav");
     for (val of this.distances) {
