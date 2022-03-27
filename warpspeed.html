@@ -5,14 +5,10 @@
 <meta name="generator" content="BBEdit 14.1" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
-<body>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="warpspeed.js"></script>
-<script>
-google.charts.load('current',{packages:['corechart']});
-google.charts.setOnLoadCallback(initCharts);
-</script>
+</head>
+<body>
 <div class="w3-container w3-black">
   <div class="w3-content w3-white w3-padding-16">
     <div class="w3-center">
@@ -60,7 +56,6 @@ simplified Cochrane function:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=2>click table for graph</td></tr></TFOOT>
   </table>
-  <script>warpspeed.noDragTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The result is referred to as an apparent speed because it does not have the same
@@ -105,7 +100,6 @@ results in:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=3>click table for graph</td></tr></TFOOT>
   </table>
-  <script>warpspeed.gWarpTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The continuum drag becomes larger and larger as more power is applied, resulting in an
@@ -127,7 +121,6 @@ the 24<sup>th</sup> century:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=3>click table for graph</td></tr></TFOOT>
   </table>
-  <script>warpspeed.eWarpTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Constitution-class and later vessels have Tertiary warp drives; hence their speed is
@@ -142,7 +135,6 @@ warp):</P>
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=5>click table for graph</td></tr></TFOOT>
   </table>
-  <script>warpspeed.wTypesTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Primary warp was the first type of warp propulsion system developed, and it is still in
@@ -157,7 +149,6 @@ efficient at sub-light speeds:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=4>click table for graph</td></tr></TFOOT>
   </table>
-  <script>warpspeed.subLightTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 When Secondary warp drives were developed, the terminology of vessel design adopted the
@@ -179,7 +170,6 @@ have the following apparent speeds:
   <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
     <TD colspan=2>click table for graph</td></tr></TFOOT>
   </table>
-  <script>warpspeed.wZeroTable();</script>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The speed of such a "Nullary" drive with no energy supplied would be 0.145 times the speed
@@ -220,10 +210,6 @@ impossible to complete:
   <THEAD id="wTravHead"></THEAD>
   <TBODY id="wTrav"></TBODY>
   </table>
-  <script>
-  warpspeed.wTravHead();
-  warpspeed.wTravTable();
-  </script>
 </div>
 </div></div>
 <div class="w3-container w3-gray">
@@ -235,6 +221,11 @@ impossible to complete:
     <div style="width:100%; padding-top:100%">
       <div id="modalChart" style="position:absolute;top:0;left:0;bottom:0;right:0">
 </div></div></div></div>
+<script>
+google.charts.load('current',{packages:['corechart']});
+google.charts.setOnLoadCallback(initCharts);
+warpspeed.loadAllTables();
+</script>
 </body>
 </html>
 

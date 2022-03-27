@@ -299,5 +299,15 @@ const warpspeed = {
       }
     }
   },
+  loadAllTables: function() {
+    this.noDragTable();
+    this.gWarpTable();
+    this.eWarpTable();
+    this.wTypesTable();
+    this.subLightTable();
+    this.wZeroTable();
+    this.wTravHead();
+    this.wTravTable();
+  }
 };
 
