@@ -1,48 +1,41 @@
 function onClick() {
   document.getElementById("modalGraph").style.display = "block";
   let chart = new google.visualization.LineChart(document.getElementById('modalChart'));
-  switch (this.id) {
-    case "noDrag": chart.draw(warpspeed.noDragData, warpspeed.noDragOptions); break;
-    case "gWarp": chart.draw(warpspeed.gWarpData, warpspeed.gWarpOptions); break;
-    case "eWarp": chart.draw(warpspeed.eWarpData, warpspeed.eWarpOptions); break;
-    case "wType": chart.draw(warpspeed.wTypeData, warpspeed.wTypeOptions); break;
-    case "subLt": chart.draw(warpspeed.subLtData, warpspeed.subLtOptions); break;
-    case "wZero": chart.draw(warpspeed.wZeroData, warpspeed.wZeroOptions); break;
-  }
+  chart.draw(warpspeed.graphData[this.id], warpspeed.graphOptions[this.id]);
 }
 
 function initCharts() {
   // Build all the chart data
-  warpspeed.noDragData = new google.visualization.DataTable();
-  warpspeed.noDragData.addColumn('number', 'W');
-  warpspeed.noDragData.addColumn('number', 'Speed');
-  for (val of warpspeed.noDrag) warpspeed.noDragData.addRow([val[0], val[1]]);
-  warpspeed.gWarpData = new google.visualization.DataTable();
-  warpspeed.gWarpData.addColumn('number', 'W');
-  warpspeed.gWarpData.addColumn('number', 'Speed');
-  for (val of warpspeed.genWarp) if (isFinite(val[0])) warpspeed.gWarpData.addRow([val[0], val[2]]);
-  warpspeed.eWarpData = new google.visualization.DataTable();
-  warpspeed.eWarpData.addColumn('number', 'W');
-  warpspeed.eWarpData.addColumn('number', 'Speed');
-  for (val of warpspeed.effWarp) if (isFinite(val[1])) warpspeed.eWarpData.addRow([val[0], val[2]]);
-  warpspeed.wTypeData = new google.visualization.DataTable();
-  warpspeed.wTypeData.addColumn('number', 'W');
-  warpspeed.wTypeData.addColumn('number', '\u0174\u00B3');
-  warpspeed.wTypeData.addColumn('number', '\u0174\u00B2');
-  warpspeed.wTypeData.addColumn('number', '\u0174');
-  for (val of warpspeed.wTypes) if (isFinite(val[0])) warpspeed.wTypeData.addRow([val[1], val[2], val[3], val[4]]);
-  warpspeed.subLtData = new google.visualization.DataTable();
-  warpspeed.subLtData.addColumn('number', 'W');
-  warpspeed.subLtData.addColumn('number', 'W\u00B3');
-  warpspeed.subLtData.addColumn('number', 'W\u00B2');
-  warpspeed.subLtData.addColumn('number', 'W');
-  for (val of warpspeed.subLight) warpspeed.subLtData.addRow([val[0], val[1], val[2], val[3]]);
-  warpspeed.wZeroData = new google.visualization.DataTable();
-  warpspeed.wZeroData.addColumn('number', 'W');
-  warpspeed.wZeroData.addColumn('number', '\u00C6');
-  for (val of warpspeed.wZero) if (isFinite(val[0])) warpspeed.wZeroData.addRow([val[0], val[1]]);
+  warpspeed.graphData.noDrag = new google.visualization.DataTable();
+  warpspeed.graphData.noDrag.addColumn('number', 'W');
+  warpspeed.graphData.noDrag.addColumn('number', 'Speed');
+  for (let val of warpspeed.noDrag) warpspeed.graphData.noDrag.addRow([val[0], val[1]]);
+  warpspeed.graphData.gWarp = new google.visualization.DataTable();
+  warpspeed.graphData.gWarp.addColumn('number', 'W');
+  warpspeed.graphData.gWarp.addColumn('number', 'Speed');
+  for (let val of warpspeed.genWarp) if (isFinite(val[0])) warpspeed.graphData.gWarp.addRow([val[0], val[2]]);
+  warpspeed.graphData.eWarp = new google.visualization.DataTable();
+  warpspeed.graphData.eWarp.addColumn('number', 'W');
+  warpspeed.graphData.eWarp.addColumn('number', 'Speed');
+  for (let val of warpspeed.effWarp) if (isFinite(val[1])) warpspeed.graphData.eWarp.addRow([val[0], val[2]]);
+  warpspeed.graphData.wType = new google.visualization.DataTable();
+  warpspeed.graphData.wType.addColumn('number', 'W');
+  warpspeed.graphData.wType.addColumn('number', '\u0174\u00B3');
+  warpspeed.graphData.wType.addColumn('number', '\u0174\u00B2');
+  warpspeed.graphData.wType.addColumn('number', '\u0174');
+  for (let val of warpspeed.wTypes) if (isFinite(val[0])) warpspeed.graphData.wType.addRow([val[1], val[2], val[3], val[4]]);
+  warpspeed.graphData.subLt = new google.visualization.DataTable();
+  warpspeed.graphData.subLt.addColumn('number', 'W');
+  warpspeed.graphData.subLt.addColumn('number', 'W\u00B3');
+  warpspeed.graphData.subLt.addColumn('number', 'W\u00B2');
+  warpspeed.graphData.subLt.addColumn('number', 'W');
+  for (let val of warpspeed.subLight) warpspeed.graphData.subLt.addRow([val[0], val[1], val[2], val[3]]);
+  warpspeed.graphData.wZero = new google.visualization.DataTable();
+  warpspeed.graphData.wZero.addColumn('number', 'W');
+  warpspeed.graphData.wZero.addColumn('number', '\u00C6');
+  for (let val of warpspeed.wZero) if (isFinite(val[0])) warpspeed.graphData.wZero.addRow([val[0], val[1]]);
   // This sets up the onClick and cursor on each of the tables
-  for (t of [ "noDrag", "gWarp", "eWarp", "wType", "subLt", "wZero" ]) {
+  for (let t in warpspeed.graphData) {
     let e = document.getElementById(t);
     e.style.cursor = "zoom-in";
     e.onclick = onClick;
@@ -82,7 +75,7 @@ const warpspeed = {
     return time.toFixed(2) + " m";
   },
   checkInfin: function(x, fix) {
-    return (isFinite(x) ? ((fix != null) ? x.toFixed(fix) : x) : ((x < 0) ? "-\u221E" : "\u221E"))
+    return (isFinite(x) ? ((fix != null) ? x.toFixed(fix) : x) : ((x < 0) ? "-&infin;" : "&infin;"))
   },
   // cached data
   data: {
@@ -98,13 +91,13 @@ const warpspeed = {
   // data accessors
   get noDrag() {
     if (this.data.noDrag.length == 0) {
-      for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30]) this.data.noDrag.push([w, w**3*this.aether(w)]);
+      for (let w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30]) this.data.noDrag.push([w, w**3*this.aether(w)]);
     }
     return this.data.noDrag;
   },
   get genWarp() {
     if (this.data.gWarp.length == 0) {
-      for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, Infinity]) {
+      for (let w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, Infinity]) {
         let ew = this.genW2effW(w);
         this.data.gWarp.push([w, ew, this.w2spd(w, ew, 3)]);
       }
@@ -113,7 +106,7 @@ const warpspeed = {
   },
   get effWarp() {
     if (this.data.fWarp.length == 0) {
-      for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 9.5, 9.9, 9.99, 9.999, 10]) {
+      for (let w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 9.5, 9.9, 9.99, 9.999, 10]) {
         let gw = this.effW2genW(w);
         this.data.fWarp.push([w, gw, this.w2spd(gw, w, 3)]);
       }
@@ -122,7 +115,7 @@ const warpspeed = {
   },
   get wTypes() {
     if (this.data.wTypes.length == 0) {
-      for (w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, Infinity]) {
+      for (let w of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, Infinity]) {
         let ew = this.genW2effW(w);
         this.data.wTypes.push([w, ew, this.w2spd(w, ew, 3), this.w2spd(w, ew, 2), this.w2spd(w, ew, 1)]);
       }
@@ -131,7 +124,7 @@ const warpspeed = {
   },
   get subLight() {
     if (this.data.subLt.length == 0) {
-      for (w of [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 0.999, 1, 1.001, 1.01, 1.1]) {
+      for (let w of [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 0.999, 1, 1.001, 1.01, 1.1]) {
         let ew = this.genW2effW(w);
         this.data.subLt.push([w, this.w2spd(w, ew, 3), this.w2spd(w, ew, 2), this.w2spd(w, ew, 1)]);
       }
@@ -140,7 +133,7 @@ const warpspeed = {
   },
   get wZero() {
     if (this.data.wZero.length == 0) {
-      for (w of [-Infinity, -5, -1, -0.5, 0, 0.5, 1, 2, 4, 7, 10, 20, Infinity])
+      for (let w of [-Infinity, -5, -1, -0.5, 0, 0.5, 1, 2, 4, 7, 10, 20, Infinity])
           this.data.wZero.push([w, this.aether(w)]);
     }
     return this.data.wZero;
@@ -169,145 +162,144 @@ const warpspeed = {
     ["Andromeda", 2500000, "ly"]
   ],
   // Graph data
-  noDragData: null,
-  gWarpData: null,
-  eWarpData: null,
-  wTypeData: null,
-  subLtData: null,
-  wZeroData: null,
-  noDragOptions: {
-    title: 'Generated Warp vs Apparent Speed',
-    hAxis: {title: 'Generated Warp'},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
-    curveType: 'function',
-    legend: 'none'
+  graphData: {
+    noDrag: null,
+    gWarp: null,
+    eWarp: null,
+    wType: null,
+    subLt: null,
+    wZero: null
   },
-  gWarpOptions: {
-    title: 'Generated Warp vs Apparent Speed',
-    hAxis: {title: 'Generated Warp'},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
-    curveType: 'function',
-    legend: 'none'
-  },
-  eWarpOptions: {
-    title: 'Effective Warp vs Apparent Speed',
-    hAxis: {title: 'Effective Warp'},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
-    curveType: 'function',
-    legend: 'none'
-  },
-  wTypeOptions: {
-    title: 'Effective Warp vs Apparent Speed',
-    hAxis: {title: 'Delivered Warp'},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}, scaleType: 'log'},
-    curveType: 'function',
-    legend: { position: 'right' }
-  },
-  subLtOptions: {
-    title: 'Warp vs Apparent Speed',
-    hAxis: {title: 'Warp'},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
-    curveType: 'function',
-    legend: { position: 'right' }
-  },
-  wZeroOptions: {
-    title: 'Warp vs Apparent Speed',
-    hAxis: {title: 'Warp', viewWindow: {min: -5, max: 20}},
-    vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
-    curveType: 'function',
-    legend: 'none'
+  graphOptions: {
+    noDrag: {
+      title: 'Generated Warp vs Apparent Speed',
+      hAxis: {title: 'Generated Warp'},
+      vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
+      curveType: 'function',
+      legend: 'none'
+    },
+    gWarp: {
+      title: 'Generated Warp vs Apparent Speed',
+      hAxis: {title: 'Generated Warp'},
+      vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
+      curveType: 'function',
+      legend: 'none'
+    },
+    eWarp: {
+      title: 'Effective Warp vs Apparent Speed',
+      hAxis: {title: 'Effective Warp'},
+      vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
+      curveType: 'function',
+      legend: 'none'
+    },
+    wType: {
+      title: 'Effective Warp vs Apparent Speed',
+      hAxis: {title: 'Delivered Warp'},
+      vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}, scaleType: 'log'},
+      curveType: 'function',
+      legend: { position: 'right' }
+    },
+    subLt: {
+      title: 'Warp vs Apparent Speed',
+      hAxis: {title: 'Warp'},
+      vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
+      curveType: 'function',
+      legend: { position: 'right' }
+    },
+    wZero: {
+      title: 'Warp vs Apparent Speed',
+      hAxis: {title: 'Warp', viewWindow: {min: -5, max: 20}},
+      vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}},
+      curveType: 'function',
+      legend: 'none'
+    }
   },
   // table creators
-  noDragTable: function() {
-    let tableBody = document.getElementById("noDrag");
-    for (val of this.noDrag) {
-      let row = tableBody.insertRow();
-      for (c of [ val[0], Math.round(val[1]).toLocaleString() ])
-          row.insertCell().appendChild(document.createTextNode(c));
-    }
-  },
-  gWarpTable: function() {
-    let tableBody = document.getElementById("gWarp");
-    for (val of this.genWarp) {
-      let row = tableBody.insertRow();
-      for (c of [ this.checkInfin(val[0], null), val[1].toFixed(2), Math.round(val[2]).toLocaleString() ])
-          row.insertCell().appendChild(document.createTextNode(c));
-    }
-  },
-  eWarpTable: function() {
-    let tableBody = document.getElementById("eWarp");
-    for (val of this.effWarp) {
-      let row = tableBody.insertRow();
-      for (c of [ val[0], this.checkInfin(val[1], 2), Math.round(val[2]).toLocaleString() ])
-          row.insertCell().appendChild(document.createTextNode(c));
-    }
-  },
-  wTypesTable: function() {
-    let tableBody = document.getElementById("wType");
-    for (val of this.wTypes) {
-      let row = tableBody.insertRow();
-      for (c of [ this.checkInfin(val[0], null), val[1].toFixed(2), Math.round(val[2]).toLocaleString(),
-                  Math.round(val[3]).toLocaleString(), Math.round(val[4]).toLocaleString() ])
-          row.insertCell().appendChild(document.createTextNode(c));
-    }
-  },
-  subLightTable: function() {
-    let tableBody = document.getElementById("subLt");
-    for (val of this.subLight) {
-      let row = tableBody.insertRow();
-      for (c of [ val[0], val[1].toFixed(3), val[2].toFixed(3), val[3].toFixed(3) ])
-          row.insertCell().appendChild(document.createTextNode(c));
-    }
-  },
-  wZeroTable: function() {
-    let tableBody = document.getElementById("wZero");
-    for (val of this.wZero) {
-      let row = tableBody.insertRow();
-      for (c of [ this.checkInfin(val[0], null), val[1].toFixed(3) ])
-          row.insertCell().appendChild(document.createTextNode(c));
-    }
-  },
-  wTravHead: function() {
-    let tableHead = document.getElementById("wTravHead");
-    for (rowData of [ ["", "", "W", this.maxCruise, this.maxEmer, "W Gen.",  this.maxCruise, this.maxEmer ],
-                      ["", "", "&Wcirc;", this.distW[0].toFixed(2), this.distW[1].toFixed(2),
-                               "W Del.",  this.distW[2].toFixed(2), this.distW[3].toFixed(2) ],
-                      ["", "", "&Wcirc;&sup3;&AElig;<i>c</i>",
-                               Math.round(this.distSp[0]).toLocaleString(),
-                               Math.round(this.distSp[1]).toLocaleString(),
-                               "&Sum;&int;W&sup3;<i>c</i>",
-                               Math.round(this.distSp[2]).toLocaleString(),
-                               Math.round(this.distSp[3]).toLocaleString() ] ]) {
-      let row = tableHead.insertRow();
-      row.classList.add("w3-light-blue");
-      for (e of rowData) {
-        let th = document.createElement("th");
-        th.innerHTML = e;
-        row.appendChild(th);
+  tableFunctions: {
+    noDrag: function(id) {
+      let tableBody = document.getElementById(id);
+      for (let val of warpspeed.noDrag) {
+        let row = tableBody.insertRow();
+        for (let c of [ val[0], Math.round(val[1]).toLocaleString() ])
+            row.insertCell().innerHTML = c;
       }
-    }
-  },
-  wTravTable: function() {
-    let tableBody = document.getElementById("wTrav");
-    for (val of this.distances) {
-      let row = tableBody.insertRow();
-      for (e of [ val[0], val[1].toLocaleString() + " " + val[2], "",
-          this.distToTime(this.distSp[0], val[1], val[2]), this.distToTime(this.distSp[1], val[1], val[2]), "",
-          this.distToTime(this.distSp[2], val[1], val[2]), this.distToTime(this.distSp[3], val[1], val[2]) ]) {
-        let cell = row.insertCell();
-        cell.innerHTML = e;
+    },
+    gWarp: function(id) {
+      let tableBody = document.getElementById(id);
+      for (let val of warpspeed.genWarp) {
+        let row = tableBody.insertRow();
+        for (let c of [ warpspeed.checkInfin(val[0], null), val[1].toFixed(2), Math.round(val[2]).toLocaleString() ])
+            row.insertCell().innerHTML = c;
+      }
+    },
+    eWarp: function(id) {
+      let tableBody = document.getElementById(id);
+      for (let val of warpspeed.effWarp) {
+        let row = tableBody.insertRow();
+        for (let c of [ val[0], warpspeed.checkInfin(val[1], 2), Math.round(val[2]).toLocaleString() ])
+            row.insertCell().innerHTML = c;
+      }
+    },
+    wType: function(id) {
+      let tableBody = document.getElementById(id);
+      for (let val of warpspeed.wTypes) {
+        let row = tableBody.insertRow();
+        for (let c of [ warpspeed.checkInfin(val[0], null), val[1].toFixed(2), Math.round(val[2]).toLocaleString(),
+                    Math.round(val[3]).toLocaleString(), Math.round(val[4]).toLocaleString() ])
+            row.insertCell().innerHTML = c;
+      }
+    },
+    subLt: function(id) {
+      let tableBody = document.getElementById(id);
+      for (let val of warpspeed.subLight) {
+        let row = tableBody.insertRow();
+        for (let c of [ val[0], val[1].toFixed(3), val[2].toFixed(3), val[3].toFixed(3) ])
+            row.insertCell().innerHTML = c;
+      }
+    },
+    wZero: function(id) {
+      let tableBody = document.getElementById(id);
+      for (let val of warpspeed.wZero) {
+        let row = tableBody.insertRow();
+        for (let c of [ warpspeed.checkInfin(val[0], null), val[1].toFixed(3) ])
+            row.insertCell().innerHTML = c;
+      }
+    },
+    wTravHead: function(id) {
+      let tableHead = document.getElementById(id);
+      for (let rowData of [
+          ["", "", "W", warpspeed.maxCruise, warpspeed.maxEmer, "W Gen.",  warpspeed.maxCruise, warpspeed.maxEmer ],
+          ["", "", "&Wcirc;", warpspeed.distW[0].toFixed(2), warpspeed.distW[1].toFixed(2),
+                   "W Del.",  warpspeed.distW[2].toFixed(2), warpspeed.distW[3].toFixed(2) ],
+          ["", "", "&Wcirc;&sup3;&AElig;<i>c</i>",
+            Math.round(warpspeed.distSp[0]).toLocaleString(), Math.round(warpspeed.distSp[1]).toLocaleString(),
+                   "&Sum;&int;W&sup3;<i>c</i>",
+            Math.round(warpspeed.distSp[2]).toLocaleString(), Math.round(warpspeed.distSp[3]).toLocaleString() ] ]) {
+        let row = tableHead.insertRow();
+        row.classList.add("w3-light-blue");
+        for (let e of rowData) {
+          let th = document.createElement("th");
+          th.innerHTML = e;
+          row.appendChild(th);
+        }
+      }
+    },
+    wTrav: function(id) {
+      let tableBody = document.getElementById(id);
+      for (let val of warpspeed.distances) {
+        let row = tableBody.insertRow();
+        for (let e of [ val[0], val[1].toLocaleString() + " " + val[2], "",
+            warpspeed.distToTime(warpspeed.distSp[0], val[1], val[2]),
+            warpspeed.distToTime(warpspeed.distSp[1], val[1], val[2]), "",
+            warpspeed.distToTime(warpspeed.distSp[2], val[1], val[2]),
+            warpspeed.distToTime(warpspeed.distSp[3], val[1], val[2]) ]) {
+          row.insertCell().innerHTML = e;
+        }
       }
     }
   },
   loadAllTables: function() {
-    this.noDragTable();
-    this.gWarpTable();
-    this.eWarpTable();
-    this.wTypesTable();
-    this.subLightTable();
-    this.wZeroTable();
-    this.wTravHead();
-    this.wTravTable();
+    for (let t in this.tableFunctions) this.tableFunctions[t](t);
   }
 };
 
