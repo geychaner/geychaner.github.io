@@ -1,47 +1,3 @@
-function onClick() {
-  document.getElementById("modalGraph").style.display = "block";
-  let chart = new google.visualization.LineChart(document.getElementById('modalChart'));
-  chart.draw(warpspeed.graphData[this.id], warpspeed.graphOptions[this.id]);
-}
-
-function initCharts() {
-  // Build all the chart data
-  warpspeed.graphData.noDrag = new google.visualization.DataTable();
-  warpspeed.graphData.noDrag.addColumn('number', 'W');
-  warpspeed.graphData.noDrag.addColumn('number', 'Speed');
-  for (let val of warpspeed.noDrag) warpspeed.graphData.noDrag.addRow([val[0], val[1]]);
-  warpspeed.graphData.gWarp = new google.visualization.DataTable();
-  warpspeed.graphData.gWarp.addColumn('number', 'W');
-  warpspeed.graphData.gWarp.addColumn('number', 'Speed');
-  for (let val of warpspeed.genWarp) if (isFinite(val[0])) warpspeed.graphData.gWarp.addRow([val[0], val[2]]);
-  warpspeed.graphData.eWarp = new google.visualization.DataTable();
-  warpspeed.graphData.eWarp.addColumn('number', 'W');
-  warpspeed.graphData.eWarp.addColumn('number', 'Speed');
-  for (let val of warpspeed.effWarp) if (isFinite(val[1])) warpspeed.graphData.eWarp.addRow([val[0], val[2]]);
-  warpspeed.graphData.wType = new google.visualization.DataTable();
-  warpspeed.graphData.wType.addColumn('number', 'W');
-  warpspeed.graphData.wType.addColumn('number', '\u0174\u00B3');
-  warpspeed.graphData.wType.addColumn('number', '\u0174\u00B2');
-  warpspeed.graphData.wType.addColumn('number', '\u0174');
-  for (let val of warpspeed.wTypes) if (isFinite(val[0])) warpspeed.graphData.wType.addRow([val[1], val[2], val[3], val[4]]);
-  warpspeed.graphData.subLt = new google.visualization.DataTable();
-  warpspeed.graphData.subLt.addColumn('number', 'W');
-  warpspeed.graphData.subLt.addColumn('number', 'W\u00B3');
-  warpspeed.graphData.subLt.addColumn('number', 'W\u00B2');
-  warpspeed.graphData.subLt.addColumn('number', 'W');
-  for (let val of warpspeed.subLight) warpspeed.graphData.subLt.addRow([val[0], val[1], val[2], val[3]]);
-  warpspeed.graphData.wZero = new google.visualization.DataTable();
-  warpspeed.graphData.wZero.addColumn('number', 'W');
-  warpspeed.graphData.wZero.addColumn('number', '\u00C6');
-  for (let val of warpspeed.wZero) if (isFinite(val[0])) warpspeed.graphData.wZero.addRow([val[0], val[1]]);
-  // This sets up the onClick and cursor on each of the tables
-  for (let t in warpspeed.graphData) {
-    let e = document.getElementById(t);
-    e.style.cursor = "zoom-in";
-    e.onclick = onClick;
-  }
-}
-
 const warpspeed = {
   // conversion functions
   aether: function(w) {
@@ -213,6 +169,48 @@ const warpspeed = {
       curveType: 'function',
       legend: 'none'
     }
+  },
+  initCharts: function() {
+    // Build all the chart data
+    warpspeed.graphData.noDrag = new google.visualization.DataTable();
+    warpspeed.graphData.noDrag.addColumn('number', 'W');
+    warpspeed.graphData.noDrag.addColumn('number', 'Speed');
+    for (let val of warpspeed.noDrag) warpspeed.graphData.noDrag.addRow([val[0], val[1]]);
+    warpspeed.graphData.gWarp = new google.visualization.DataTable();
+    warpspeed.graphData.gWarp.addColumn('number', 'W');
+    warpspeed.graphData.gWarp.addColumn('number', 'Speed');
+    for (let val of warpspeed.genWarp) if (isFinite(val[0])) warpspeed.graphData.gWarp.addRow([val[0], val[2]]);
+    warpspeed.graphData.eWarp = new google.visualization.DataTable();
+    warpspeed.graphData.eWarp.addColumn('number', 'W');
+    warpspeed.graphData.eWarp.addColumn('number', 'Speed');
+    for (let val of warpspeed.effWarp) if (isFinite(val[1])) warpspeed.graphData.eWarp.addRow([val[0], val[2]]);
+    warpspeed.graphData.wType = new google.visualization.DataTable();
+    warpspeed.graphData.wType.addColumn('number', 'W');
+    warpspeed.graphData.wType.addColumn('number', '\u0174\u00B3');
+    warpspeed.graphData.wType.addColumn('number', '\u0174\u00B2');
+    warpspeed.graphData.wType.addColumn('number', '\u0174');
+    for (let val of warpspeed.wTypes) if (isFinite(val[0])) warpspeed.graphData.wType.addRow([val[1], val[2], val[3], val[4]]);
+    warpspeed.graphData.subLt = new google.visualization.DataTable();
+    warpspeed.graphData.subLt.addColumn('number', 'W');
+    warpspeed.graphData.subLt.addColumn('number', 'W\u00B3');
+    warpspeed.graphData.subLt.addColumn('number', 'W\u00B2');
+    warpspeed.graphData.subLt.addColumn('number', 'W');
+    for (let val of warpspeed.subLight) warpspeed.graphData.subLt.addRow([val[0], val[1], val[2], val[3]]);
+    warpspeed.graphData.wZero = new google.visualization.DataTable();
+    warpspeed.graphData.wZero.addColumn('number', 'W');
+    warpspeed.graphData.wZero.addColumn('number', '\u00C6');
+    for (let val of warpspeed.wZero) if (isFinite(val[0])) warpspeed.graphData.wZero.addRow([val[0], val[1]]);
+    // This sets up the onClick and cursor on each of the tables
+    for (let t in warpspeed.graphData) {
+      let e = document.getElementById(t);
+      e.style.cursor = "zoom-in";
+      e.onclick = warpspeed.onClick;
+    }
+  },
+  onClick: function() {
+    document.getElementById("modalGraph").style.display = "block";
+    let chart = new google.visualization.LineChart(document.getElementById('modalChart'));
+    chart.draw(warpspeed.graphData[this.id], warpspeed.graphOptions[this.id]);
   },
   // table creators
   tableFunctions: {
