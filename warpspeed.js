@@ -1,17 +1,18 @@
-function onClick(element) {
+function onClick() {
   document.getElementById("modalGraph").style.display = "block";
   var chart = new google.visualization.LineChart(document.getElementById('modalChart'));
-  switch (element) {
-    case "noDragGraph": chart.draw(warpspeed.noDragData, warpspeed.noDragOptions); break;
-    case "gWarpGraph": chart.draw(warpspeed.gWarpData, warpspeed.gWarpOptions); break;
-    case "eWarpGraph": chart.draw(warpspeed.eWarpData, warpspeed.eWarpOptions); break;
-    case "wTypeGraph": chart.draw(warpspeed.wTypeData, warpspeed.wTypeOptions); break;
-    case "subLtGraph": chart.draw(warpspeed.subLtData, warpspeed.subLtOptions); break;
-    case "wZeroGraph": chart.draw(warpspeed.wZeroData, warpspeed.wZeroOptions); break;
+  switch (this.id) {
+    case "noDrag": chart.draw(warpspeed.noDragData, warpspeed.noDragOptions); break;
+    case "gWarp": chart.draw(warpspeed.gWarpData, warpspeed.gWarpOptions); break;
+    case "eWarp": chart.draw(warpspeed.eWarpData, warpspeed.eWarpOptions); break;
+    case "wType": chart.draw(warpspeed.wTypeData, warpspeed.wTypeOptions); break;
+    case "subLt": chart.draw(warpspeed.subLtData, warpspeed.subLtOptions); break;
+    case "wZero": chart.draw(warpspeed.wZeroData, warpspeed.wZeroOptions); break;
   }
 }
 
 function initCharts() {
+  // Build all the chart data
   warpspeed.noDragData = new google.visualization.DataTable();
   warpspeed.noDragData.addColumn('number', 'W');
   warpspeed.noDragData.addColumn('number', 'Speed');
@@ -40,7 +41,12 @@ function initCharts() {
   warpspeed.wZeroData.addColumn('number', 'W');
   warpspeed.wZeroData.addColumn('number', '\u00C6');
   for (val of warpspeed.wZero) if (isFinite(val[0])) warpspeed.wZeroData.addRow([val[0], val[1]]);
-  // This should also set up the onClick and cursor on each of the tables so there's no race condition
+  // This sets up the onClick and cursor on each of the tables
+  for (t of [ "noDrag", "gWarp", "eWarp", "wType", "subLt", "wZero" ]) {
+    var e = document.getElementById(t);
+    e.style.cursor = "zoom-in";
+    e.onclick = onClick;
+  }
 }
 
 const warpspeed = {
@@ -168,7 +174,7 @@ const warpspeed = {
     legend: 'none'
   },
   wTypeOptions: {
-    title: 'Delivered Warp vs Apparent Speed',
+    title: 'Effective Warp vs Apparent Speed',
     hAxis: {title: 'Delivered Warp'},
     vAxis: {title: 'Apparent Speed \u00D7c', format: 'short', viewWindow: {min: 0}, scaleType: 'log'},
     curveType: 'function',
