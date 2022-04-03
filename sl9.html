@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<HTML>
+<HTML lang="en">
 <HEAD>
 <TITLE>Shoemaker-Levy 9 at BBSO</TITLE>
 <meta name="generator" content="BBEdit 14.1" />
@@ -10,6 +10,7 @@
 <script>
 function onClick(element) {
   document.getElementById("img01").src = element.src;
+  document.getElementById("img01").alt = element.alt;
   document.getElementById("modal01").style.display = "block";
 }
 </script>
@@ -93,7 +94,7 @@ target="_blank">JPL's Comet Shoemaker-Levy 9 home page</a>.
 <span class="w3-serif" style="font-size:larger">&Lambda;&#x030A;</span></a></h4>
 </div>
 <div id="modal01" class="w3-modal w3-center" onclick="this.style.display='none'">
-<div class="w3-modal-content"><img class="w3-center" id="img01" style="width:100%"></div>
+<div class="w3-modal-content"><img class="w3-center" src="" alt="" id="img01" style="width:100%"></div>
 </div>
 </BODY>
 </HTML>
