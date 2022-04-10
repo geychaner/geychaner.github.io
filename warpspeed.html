@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="warpspeed.js"></script>
+<style>
+.w3-table-all td{border-left:1px solid #ddd}
+</style>
 </head>
 <body>
 <div class="w3-container w3-black w3-topbar w3-bottombar w3-border-black">
@@ -45,15 +48,15 @@ speed in normal spacetime in terms of <i>c</i>, one must multiply W<sup>3</sup> 
 simplified Cochrane function:
 </p>
 <div class="w3-center" style="font-size:larger">
-  <p class="w3-center" style="font-size:larger">&AElig;(W) = e<sup>6&times;tanh(<sup>W-1</sup>/<sub>3</sub>)</sup></p>
+  <p style="font-size:larger">&AElig;(W) = e<sup>6&times;tanh(<sup>W-1</sup>/<sub>3</sub>)</sup></p>
 </div>
-<div class="w3-content" style="width:50%">
-  <table class="w3-table-all w3-centered">
-  <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>W&sup3;&AElig;<i>c</i></TH></TR></THEAD>
-  <TBODY id="noDrag"></TBODY>
-  <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-    <TD colspan=2>click table for graph</td></tr></TFOOT>
-  </table>
+<div class="w3-responsive">
+<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<THEAD><TR class="w3-light-blue"><TH>W</TH><TH>W&sup3;&AElig;<i>c</i></TH></TR></THEAD>
+<TBODY id="noDrag"></TBODY>
+<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
+  <TD colspan=2>click table for graph</td></tr></TFOOT>
+</table>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The result is referred to as an apparent speed because it does not have the same
@@ -84,20 +87,20 @@ characterized as a reduction from a generated warp factor (W) to an effective wa
 (&Wcirc;), though the actual warp field energy density is still the same:
 </p>
 <div class="w3-center" style="font-size:larger">
-<p class="w3-center" style="font-size:larger">&Wcirc; = 10&times;tanh(W&times;arccoth(10))</P>
+<p style="font-size:larger">&Wcirc; = 10&times;tanh(W&times;arccoth(10))</P>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Because the actual warp field energy density is still the same, the generated warp factor
 is used in the Cochrane equation &AElig;(W) rather than the effective warp factor. This
 results in:
 </P>
-<div class="w3-content" style="width:50%">
-  <table class="w3-table-all w3-centered">
-  <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH></TR></THEAD>
-  <TBODY id="gWarp"></TBODY>
-  <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-    <TD colspan=3>click table for graph</td></tr></TFOOT>
-  </table>
+<div class="w3-responsive">
+<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH></TR></THEAD>
+<TBODY id="gWarp"></TBODY>
+<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
+  <TD colspan=3>click table for graph</td></tr></TFOOT>
+</table>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The continuum drag becomes larger and larger as more power is applied, resulting in an
@@ -110,43 +113,43 @@ the apparent discrepancy between the eras. Here is the standard warp factor scal
 the 24<sup>th</sup> century:
 </P>
 <div class="w3-center" style="font-size:larger">
-<p class="w3-center" style="font-size:larger">W = arctanh(&Wcirc;/10)/arccoth(10)</P>
+<p style="font-size:larger">W = arctanh(&Wcirc;/10)/arccoth(10)</P>
 </div>
-<div class="w3-content" style="width:50%">
-  <table class="w3-table-all w3-centered">
-  <THEAD><TR class="w3-light-blue"><TH>&Wcirc;</TH><TH>W</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH></TR></THEAD>
-  <TBODY id="eWarp"></TBODY>
-  <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-    <TD colspan=3>click table for graph</td></tr></TFOOT>
-  </table>
+<div class="w3-responsive">
+<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<THEAD><TR class="w3-light-blue"><TH>&Wcirc;</TH><TH>W</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH></TR></THEAD>
+<TBODY id="eWarp"></TBODY>
+<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
+  <TD colspan=3>click table for graph</td></tr></TFOOT>
+</table>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Constitution-class and later vessels have Tertiary warp drives; hence their speed is
 proportional to &Wcirc;<sup>3</sup>. Simpler warp drives can also be constructed which
 generate speeds proportional to &Wcirc; (Primary warp) or &Wcirc;<sup>2</sup> (Secondary
 warp):</P>
-<div class="w3-content" style="width:50%">
-  <table class="w3-table-all w3-centered">
-  <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH>
-      <TH>&Wcirc;&sup2;&AElig;<i>c</i></TH><TH>&Wcirc;&AElig;<i>c</i></TH></TR></THEAD>
-  <TBODY id="wType"></TBODY>
-  <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-    <TD colspan=5>click table for graph</td></tr></TFOOT>
-  </table>
+<div class="w3-responsive">
+<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH>
+    <TH>&Wcirc;&sup2;&AElig;<i>c</i></TH><TH>&Wcirc;&AElig;<i>c</i></TH></TR></THEAD>
+<TBODY id="wType"></TBODY>
+<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
+  <TD colspan=5>click table for graph</td></tr></TFOOT>
+</table>
 </div>
 <P class="w3-margin" style="text-align:justify">
 Primary warp was the first type of warp propulsion system developed, and it is still in
 use on later vessels as part of the Impulse drive subsystem, because it is far more
 efficient at sub-light speeds:
 </p>
-<div class="w3-content" style="width:50%">
-  <table class="w3-table-all w3-centered">
-  <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH>
-      <TH>&Wcirc;&sup2;&AElig;<i>c</i></TH><TH>&Wcirc;&AElig;<i>c</i></TH></TR></THEAD>
-  <TBODY id="subLt"></TBODY>
-  <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-    <TD colspan=4>click table for graph</td></tr></TFOOT>
-  </table>
+<div class="w3-responsive">
+<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH>
+    <TH>&Wcirc;&sup2;&AElig;<i>c</i></TH><TH>&Wcirc;&AElig;<i>c</i></TH></TR></THEAD>
+<TBODY id="subLt"></TBODY>
+<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
+  <TD colspan=4>click table for graph</td></tr></TFOOT>
+</table>
 </div>
 <P class="w3-margin" style="text-align:justify">
 When Secondary warp drives were developed, the terminology of vessel design adopted the
@@ -161,13 +164,13 @@ A fascinating side-effect of the Cochrane equation is that, theoretically, a "Nu
 warp drive proportional to W<sup>0</sup> (which is equal to 1 for all values of W) would
 have the following apparent speeds:
 </p>
-<div class="w3-content" style="width:50%">
-  <table class="w3-table-all w3-centered">
-  <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&AElig;<i>c</i></TH></THEAD>
-  <TBODY id="wZero"></TBODY>
-  <TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-    <TD colspan=2>click table for graph</td></tr></TFOOT>
-  </table>
+<div class="w3-responsive">
+<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&AElig;<i>c</i></TH></THEAD>
+<TBODY id="wZero"></TBODY>
+<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
+  <TD colspan=2>click table for graph</td></tr></TFOOT>
+</table>
 </div>
 <P class="w3-margin" style="text-align:justify">
 The speed of such a "Nullary" drive with no energy supplied would be 0.145 times the speed
@@ -203,11 +206,11 @@ would require about 8 years to reach the Neutral Zones from the center of Federa
 space at a maximum safe cruising speed of Warp 6, which would make the "five-year mission"
 impossible to complete:
 </P>
-<div class="w3-content">
-  <table class="w3-table-all w3-centered">
-  <THEAD id="wTravHead"></THEAD>
-  <TBODY id="wTrav"></TBODY>
-  </table>
+<div class="w3-responsive">
+<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<THEAD id="wTravHead"></THEAD>
+<TBODY id="wTrav"></TBODY>
+</table>
 </div>
 </div></div>
 
