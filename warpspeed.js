@@ -22,13 +22,13 @@ const warpspeed = {
   },
   distToTime: function(v, d, u) {
     let time = d/v * (u == "pc" ? 3.26156: 1);
-    if (time > 1) { return time.toFixed(2) + " y"; }
+    if (time > 1) { return time.toFixed(2) + "&nbsp;y"; }
     else time *= 365.2422;
-    if (time > 1) { return time.toFixed(2) + " d"; }
+    if (time > 1) { return time.toFixed(2) + "&nbsp;d"; }
     else time *= 24;
-    if (time > 1) { return time.toFixed(2) + " h"; }
+    if (time > 1) { return time.toFixed(2) + "&nbsp;h"; }
     else time *= 60;
-    return time.toFixed(2) + " m";
+    return time.toFixed(2) + "&nbsp;m";
   },
   checkInfin: function(x, fix) {
     return (isFinite(x) ? ((fix != null) ? x.toFixed(fix) : x) : ((x < 0) ? "-&infin;" : "&infin;"))
@@ -109,11 +109,11 @@ const warpspeed = {
     return this.data.distSp;
   },
   distances: [
-    ["&alpha; Centauri", 4.37, "ly"],
-    ["UFP Core", 7, "pc"],
+    ["&alpha;&nbsp;Centauri", 4.37, "ly"],
+    ["UFP&nbsp;Core", 7, "pc"],
     ["Rigel", 860, "ly"],
     ["Deneb", 2615, "ly"],
-    ["Neut. Zones", 4750, "pc"],
+    ["Neut.&nbsp;Zones", 4750, "pc"],
     ["LMC", 163000, "ly"],
     ["Andromeda", 2500000, "ly"]
   ],
@@ -266,9 +266,9 @@ const warpspeed = {
     wTravHead: function(id) {
       let tableHead = document.getElementById(id);
       for (let rowData of [
-          ["", "", "W", warpspeed.maxCruise, warpspeed.maxEmer, "W Gen.",  warpspeed.maxCruise, warpspeed.maxEmer ],
+          ["", "", "W", warpspeed.maxCruise, warpspeed.maxEmer, "W&nbsp;Gen.",  warpspeed.maxCruise, warpspeed.maxEmer ],
           ["", "", "&Wcirc;", warpspeed.distW[0].toFixed(2), warpspeed.distW[1].toFixed(2),
-                   "W Del.",  warpspeed.distW[2].toFixed(2), warpspeed.distW[3].toFixed(2) ],
+                   "W&nbsp;Del.",  warpspeed.distW[2].toFixed(2), warpspeed.distW[3].toFixed(2) ],
           ["", "", "&Wcirc;&sup3;&AElig;<i>c</i>",
             Math.round(warpspeed.distSp[0]).toLocaleString(), Math.round(warpspeed.distSp[1]).toLocaleString(),
                    "&Sum;&int;W&sup3;<i>c</i>",
@@ -286,7 +286,7 @@ const warpspeed = {
       let tableBody = document.getElementById(id);
       for (let val of warpspeed.distances) {
         let row = tableBody.insertRow();
-        for (let e of [ val[0], val[1].toLocaleString() + " " + val[2], "",
+        for (let e of [ val[0], val[1].toLocaleString() + "&nbsp;" + val[2], "",
             warpspeed.distToTime(warpspeed.distSp[0], val[1], val[2]),
             warpspeed.distToTime(warpspeed.distSp[1], val[1], val[2]), "",
             warpspeed.distToTime(warpspeed.distSp[2], val[1], val[2]),
