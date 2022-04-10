@@ -8,7 +8,13 @@
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="warpspeed.js"></script>
 <style>
-.w3-table-all td{border-left:1px solid #ddd}
+p.w3-margin { text-align:justify }
+.w3-table-all { min-width:50%; width:auto; margin-left:auto; margin-right:auto }
+.w3-table-all td { border-left:1px solid #ddd }
+.w3-table-all tfoot td { padding:0px; font-size:smaller }
+table.equation { border-spacing:0px; width:auto; margin-left:auto; margin-right:auto; font-size:larger }
+div.numer { font-size:smaller; border-bottom:1px solid; text-align:center }
+div.denom { font-size:smaller;    border-top:1px solid; text-align:center }
 </style>
 </head>
 <body>
@@ -16,13 +22,13 @@
 <div class="w3-content w3-white w3-padding">
 <H2 class="w3-text-blue w3-center">Warp Speed Travel</H2>
 <h5 class="w3-center">&copy;2022 Glenn Eychaner</h5>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 DISCLAIMER: Nothing in this essay is "canon". It was inspired by finding a copy of "<a
 href="Star%20Trek%20Technology%20-%20Leon%20Myerson.pdf" target="_blank">Star Trek Technology</a>,"
 &copy;1988 Leon Myerson, in some old filing boxes, and updates and improves upon his
 thoughts and equations regarding warp travel.
 </P>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 Ships in Star Trek travel at apparent faster-than-light speeds by using a "warp drive" to
 generate a "warp field" which bends space and subspace, permitting the ship to exceed the
 speed of light and break the conventional laws of inertia, momentum, kinetic energy, and
@@ -35,7 +41,7 @@ spacetime (<i>c</i>); Warp 2 is twice that field density, and so on. At warp fac
 than Warp 1, often referred to as "impulse power," the ship, though traveling via the warp
 field effect, is traveling slower than the speed of light.
 </P>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 The formula relating the warp factor (W) to apparent speed is not the inadequate V =
 W<sup>3</sup><i>c</i>. The United Federation of Planets' Treaty Exploration Zone mapped in
 the Starfleet Technical Manual has a radius of 4,750 parsecs, or over 15,000 light years,
@@ -47,18 +53,19 @@ boundary from the center. Even at the speed given in Leon Myerson's document for
 speed in normal spacetime in terms of <i>c</i>, one must multiply W<sup>3</sup> by the
 simplified Cochrane function:
 </p>
-<div class="w3-center" style="font-size:larger">
-  <p style="font-size:larger">&AElig;(W) = e<sup>6&times;tanh(<sup>W-1</sup>/<sub>3</sub>)</sup></p>
-</div>
+<table class="w3-center equation">
+<tr><td rowspan=2 style="font-size:larger">&AElig;(W) = e</td><td>6&times;tanh(</td>
+    <td style="font-size:smaller"><div class="numer">W-1</div><div class="denom">3</div></td><td>)</td></tr>
+<tr><td colspan=3 style="font-size:smaller">&nbsp;</td></tr>
+</table>
 <div class="w3-responsive">
-<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<table class="w3-table-all w3-centered">
 <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>W&sup3;&AElig;<i>c</i></TH></TR></THEAD>
 <TBODY id="noDrag"></TBODY>
-<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-  <TD colspan=2>click table for graph</td></tr></TFOOT>
+<TFOOT><TR class="w3-light-blue"><TD colspan=2>click table for graph</td></tr></TFOOT>
 </table>
 </div>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 The result is referred to as an apparent speed because it does not have the same
 properties (momentum, inertia, or kinetic energy) as a true velocity in spacetime. In fact,
 a ship which shuts down its warp engines will decelerate from whatever speed it was traveling
@@ -67,7 +74,7 @@ collapses (which itself takes a substantial amount of time). Thus, we will conti
 the term "speed" rather than "velocity" to refer to the motion of a starship under warp
 power.
 </p>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 It should be noted that the Cochrane equation &AElig;(W) above is a simplification that is
 only valid in a spacetime free of extreme gravitational, electromagnetic, and other fields
 and gradients, and quantum or subspace distortions. In the presence of these factors, the
@@ -75,7 +82,7 @@ Cochrane equation becomes much more complicated, leading to effects such as a sh
 accelerating suddenly to a high warp factor while extremely close to an object of stellar
 mass potentially traveling backward in time (assuming it is not destroyed in the process).
 </p>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 From the earliest days of starship operations, the speeds produced by warp fields were
 found to be smaller than predicted. At first, engineers blamed inefficiencies in the
 ships' reactors, warp cores, warp coils, or warp nacelles, but after further
@@ -87,71 +94,67 @@ characterized as a reduction from a generated warp factor (W) to an effective wa
 (&Wcirc;), though the actual warp field energy density is still the same:
 </p>
 <div class="w3-center" style="font-size:larger">
-<p style="font-size:larger">&Wcirc; = 10&times;tanh(W&times;arccoth(10))</P>
+<p style="font-size:larger">&Wcirc; = 10&times;tanh(W&times;arccoth(10))</p>
 </div>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 Because the actual warp field energy density is still the same, the generated warp factor
 is used in the Cochrane equation &AElig;(W) rather than the effective warp factor. This
 results in:
 </P>
 <div class="w3-responsive">
-<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<table class="w3-table-all w3-centered">
 <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH></TR></THEAD>
 <TBODY id="gWarp"></TBODY>
-<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-  <TD colspan=3>click table for graph</td></tr></TFOOT>
+<TFOOT><TR class="w3-light-blue"><TD colspan=3>click table for graph</td></tr></TFOOT>
 </table>
 </div>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 The continuum drag becomes larger and larger as more power is applied, resulting in an
 absolute maximum speed of 403,429<i>c</i> at infinite generated power and an effective Warp 10.
 </P>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 By the 24<sup>th</sup> century, it had become standard practice to give warp factors in
 terms of the effective warp factor rather than the generated warp factor, which explains
 the apparent discrepancy between the eras. Here is the standard warp factor scale used in
 the 24<sup>th</sup> century:
 </P>
 <div class="w3-center" style="font-size:larger">
-<p style="font-size:larger">W = arctanh(&Wcirc;/10)/arccoth(10)</P>
+<p style="font-size:larger">W = arctanh(<sup>&Wcirc;</sup>/<sub>10</sub>) / arccoth(10)</P>
 </div>
 <div class="w3-responsive">
-<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<table class="w3-table-all w3-centered">
 <THEAD><TR class="w3-light-blue"><TH>&Wcirc;</TH><TH>W</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH></TR></THEAD>
 <TBODY id="eWarp"></TBODY>
-<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-  <TD colspan=3>click table for graph</td></tr></TFOOT>
+<TFOOT><TR class="w3-light-blue"><TD colspan=3>click table for graph</td></tr></TFOOT>
 </table>
 </div>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 Constitution-class and later vessels have Tertiary warp drives; hence their speed is
 proportional to &Wcirc;<sup>3</sup>. Simpler warp drives can also be constructed which
 generate speeds proportional to &Wcirc; (Primary warp) or &Wcirc;<sup>2</sup> (Secondary
 warp):</P>
 <div class="w3-responsive">
-<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<table class="w3-table-all w3-centered">
 <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH>
     <TH>&Wcirc;&sup2;&AElig;<i>c</i></TH><TH>&Wcirc;&AElig;<i>c</i></TH></TR></THEAD>
 <TBODY id="wType"></TBODY>
-<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-  <TD colspan=5>click table for graph</td></tr></TFOOT>
+<TFOOT><TR class="w3-light-blue"><TD colspan=5>click table for graph</td></tr></TFOOT>
 </table>
 </div>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 Primary warp was the first type of warp propulsion system developed, and it is still in
 use on later vessels as part of the Impulse drive subsystem, because it is far more
 efficient at sub-light speeds:
 </p>
 <div class="w3-responsive">
-<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<table class="w3-table-all w3-centered">
 <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&Wcirc;&sup3;&AElig;<i>c</i></TH>
     <TH>&Wcirc;&sup2;&AElig;<i>c</i></TH><TH>&Wcirc;&AElig;<i>c</i></TH></TR></THEAD>
 <TBODY id="subLt"></TBODY>
-<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-  <TD colspan=4>click table for graph</td></tr></TFOOT>
+<TFOOT><TR class="w3-light-blue"><TD colspan=4>click table for graph</td></tr></TFOOT>
 </table>
 </div>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 When Secondary warp drives were developed, the terminology of vessel design adopted the
 convention of referring to the hull housing the Secondary drive system as the secondary
 hull, and the other housing the Impulse drive with its Primary drive system as the primary
@@ -159,27 +162,26 @@ hull. With the advent of Tertiary drive systems, there were still only two drive
 and two main hull sections, so the one with the larger engine system continued to be
 called the secondary hull.
 </p>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 A fascinating side-effect of the Cochrane equation is that, theoretically, a "Nullary"
 warp drive proportional to W<sup>0</sup> (which is equal to 1 for all values of W) would
 have the following apparent speeds:
 </p>
 <div class="w3-responsive">
-<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<table class="w3-table-all w3-centered">
 <THEAD><TR class="w3-light-blue"><TH>W</TH><TH>&AElig;<i>c</i></TH></THEAD>
 <TBODY id="wZero"></TBODY>
-<TFOOT style="font-size:smaller"><TR class="w3-light-blue" style="font-size:smaller">
-  <TD colspan=2>click table for graph</td></tr></TFOOT>
+<TFOOT><TR class="w3-light-blue"><TD colspan=2>click table for graph</td></tr></TFOOT>
 </table>
 </div>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 The speed of such a "Nullary" drive with no energy supplied would be 0.145 times the speed
 of light, allowing rapid interplanetary travel at low or no energy cost. Though subspace
 particles are known to obey this equation (and, in fact, cannot be observed at rest in
 spacetime as a result), Federation scientists have been unable to take advantage of this
 phenomenon.
 </p>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 Another effect of this phenomenon is that the "bubble" of spacetime "carried along" by any
 warp drive containing the generating ship is subject to the relativistic effects of the
 "zero-energy nullary" speed of 0.145<i>c</i>, though that only results in a time dilation
@@ -199,7 +201,7 @@ at speeds up to and even beyond an effective speed of Warp 10.
 <div class="w3-center">
 <H3 class="w3-text-blue">Appendix</H3>
 </div>
-<P class="w3-margin" style="text-align:justify">
+<P class="w3-margin">
 Leon Myerson's equations, while an excellent effort, result in speeds that are much too
 slow to explain warp travel in the Star Trek universe. Under his equations, a starship
 would require about 8 years to reach the Neutral Zones from the center of Federation
@@ -207,7 +209,7 @@ space at a maximum safe cruising speed of Warp 6, which would make the "five-yea
 impossible to complete:
 </P>
 <div class="w3-responsive">
-<table class="w3-table-all w3-centered" style="min-width:50%;width:auto;margin-left:auto;margin-right:auto">
+<table class="w3-table-all w3-centered">
 <THEAD id="wTravHead"></THEAD>
 <TBODY id="wTrav"></TBODY>
 </table>
