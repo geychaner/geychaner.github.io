@@ -269,9 +269,9 @@ const warpspeed = {
           ["", "", "W", warpspeed.maxCruise, warpspeed.maxEmer, "W&nbsp;Gen.",  warpspeed.maxCruise, warpspeed.maxEmer ],
           ["", "", "&Wcirc;", warpspeed.distW[0].toFixed(2), warpspeed.distW[1].toFixed(2),
                    "W&nbsp;Del.",  warpspeed.distW[2].toFixed(2), warpspeed.distW[3].toFixed(2) ],
-          ["", "", "&Wcirc;&sup3;&AElig;<i>c</i>",
+          ["", "", "&Wcirc;<sup>3</sup>&AElig;<i>c</i>",
             Math.round(warpspeed.distSp[0]).toLocaleString(), Math.round(warpspeed.distSp[1]).toLocaleString(),
-                   "&Sum;&int;W&sup3;<i>c</i>",
+                   "&Sum;&int;W<sup>3</sup><i>c</i>",
             Math.round(warpspeed.distSp[2]).toLocaleString(), Math.round(warpspeed.distSp[3]).toLocaleString() ] ]) {
         let row = tableHead.insertRow();
         row.classList.add("w3-light-blue");
